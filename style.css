@@ -1,7 +1,7 @@
-/* FIXED HEADER */
+/* FIXED HEADER (하단 테두리 제거 버전) */
 .header {
   position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
-  background: var(--header-glass); border-bottom: 1px solid var(--line);
+  background: var(--header-glass); border-bottom: none;
   backdrop-filter: blur(14px);
 }
 .header-inner {
@@ -27,7 +27,7 @@
 .header-cta { min-height: 40px; padding: 0 16px; font-size: 11px; white-space: nowrap; }
 
 /* ===================================================
-   PINNED SCREEN STACKING TRACKS & Z-INDEX
+   OSPLY-STYLE PURE CSS PINNED SCREEN STACKING
    =================================================== */
 .pin-track {
   position: relative;
@@ -41,79 +41,18 @@
   width: 100%;
   overflow: hidden;
   display: flex;
-  box-shadow: -15px 0 35px var(--brown-shadow-10);
+  box-shadow: 0 -20px 40px var(--brown-shadow-08);
 }
 
-/* 각 파트별 스태킹 레이어 */
 #home-track { z-index: 1; }
 #about-track { z-index: 2; }
 #ensemble-track { z-index: 3; }
 #lesson-track { z-index: 4; }
 #quote-track { z-index: 5; }
 #location-track { z-index: 6; }
-#contact-track { z-index: 7; }
 
 /* ===================================================
-   RIGHT-TO-LEFT CARD OVERLAY & BLUR-IN ANIMATIONS
-   (히어로 제외 1, 2, 3, 4, 5번째 파트 적용)
-   =================================================== */
-@keyframes cardSlideBlurIn {
-  0% {
-    opacity: 0.1;
-    transform: translateX(100%);
-    filter: blur(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-    filter: blur(0);
-  }
-}
-
-/* 1번째 파트 (About: 히어로 우측에서 진입) */
-#about-track {
-  animation: cardSlideBlurIn linear both;
-  animation-timeline: view();
-  animation-range: entry 0% cover 45%;
-}
-
-/* 2번째 파트 (Ensemble: 1번 우측에서 진입) */
-#ensemble-track {
-  animation: cardSlideBlurIn linear both;
-  animation-timeline: view();
-  animation-range: entry 0% cover 45%;
-}
-
-/* 3번째 파트 (Lesson: 2번 우측에서 진입) */
-#lesson-track {
-  animation: cardSlideBlurIn linear both;
-  animation-timeline: view();
-  animation-range: entry 0% cover 45%;
-}
-
-/* 4번째 파트 (Quote: 3번 우측에서 진입) */
-#quote-track {
-  animation: cardSlideBlurIn linear both;
-  animation-timeline: view();
-  animation-range: entry 0% cover 45%;
-}
-
-/* 5번째 파트 (Location: 4번 우측에서 진입) */
-#location-track {
-  animation: cardSlideBlurIn linear both;
-  animation-timeline: view();
-  animation-range: entry 0% cover 45%;
-}
-
-/* 예약 및 문의 (5번 우측에서 자연스럽게 덮임) */
-#contact-track {
-  animation: cardSlideBlurIn linear both;
-  animation-timeline: view();
-  animation-range: entry 0% cover 45%;
-}
-
-/* ===================================================
-   1. HERO SECTION (독립 히어로 파트)
+   1. HERO SECTION
    =================================================== */
 .hero {
   color: var(--white);
@@ -269,9 +208,7 @@
 @keyframes blinkCursor { from, to { border-color: transparent; } 50% { border-color: var(--amber-orange); } }
 @keyframes smoothFadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-/* ===================================================
-   2. ABOUT (1번째 파트 - 단체소개)
-   =================================================== */
+/* 2. ABOUT */
 .intro { background: var(--ivory); width: 100%; align-items: center; }
 .intro-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 8%; align-items: center; }
 .intro-image { position: relative; height: 440px; }
@@ -283,9 +220,7 @@
 }
 .intro-signature { margin-top: 24px; color: var(--wood-brown); font: italic 20px var(--serif); }
 
-/* ===================================================
-   3. ENSEMBLE (2번째 파트 - 앙상블소개)
-   =================================================== */
+/* 3. ENSEMBLE */
 .ensemble { background: var(--paper); width: 100%; align-items: center; }
 .section-head { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 36px; }
 .ensemble-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -297,21 +232,122 @@
 .card-info h3 { margin: 8px 0; font: 500 20px var(--serif); color: var(--charcoal-brown); }
 .card-info p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
 
-/* ===================================================
-   4. LESSON (3번째 파트 - 레슨소개)
-   =================================================== */
-.lesson { background: var(--ivory); width: 100%; align-items: center; }
-.lesson-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8%; align-items: center; }
-.lesson-photo { height: 440px; }
-.lesson-photo img { height: 100%; border-radius: 4px; }
+/* 4. LESSON (배경 블러 & 카드 슬라이드 5초 간격 무한 동기화) */
+.lesson { 
+  position: relative; 
+  background: var(--ivory); 
+  width: 100%; 
+  align-items: center; 
+  overflow: hidden;
+}
+
+/* 배경 블러 슬라이드 */
+.lesson-bg-slider {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bg-slide {
+  position: absolute;
+  inset: -40px; /* 블러 테두리 흰색 왜곡 방지 margin */
+  background-size: cover;
+  background-position: center;
+  filter: blur(1px) brightness(0.85);
+  opacity: 0;
+  animation: lessonSyncLoop 15s infinite ease-in-out;
+}
+
+.bg-slide-1 { background-image: url("images/room.jpg"); animation-delay: 0s; }
+.bg-slide-2 { background-image: url("images/cello.jpg"); animation-delay: 5s; }
+.bg-slide-3 { background-image: url("images/pianoroom.jpg"); animation-delay: 10s; }
+
+/* 배경 톤 가독성을 위한 반투명 오버레이 */
+.lesson-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(245, 240, 230, 0.45);
+  backdrop-filter: blur(10px);
+}
+
+.lesson-grid { 
+  position: relative;
+  z-index: 1;
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 5%; 
+  align-items: center; 
+}
+
+/* 글자 영역을 둥근 카드 박스 형태 만들기 */
+.lesson-content-card {
+  background: rgba(251, 249, 244, 0.82); /* 은은한 아이보리 반투명 배경 */
+  backdrop-filter: blur(12px); /* 글자 카드 뒤쪽에 살짝 들어가는 블러 효과 */
+  -webkit-backdrop-filter: blur(12px);
+  padding: 40px 36px;
+  border-radius: 30px; /* 둥근 테두리 */
+  border: 1px solid rgba(121, 84, 56, 0.15); /* 은은한 테두리선 */
+  box-shadow: 0 12px 32px rgba(41, 37, 31, 0.08); /* 부드러운 그림자 */
+}
+
+.lesson-list { margin: 24px 0; border-top: 1px solid var(--line); }
+.lesson-item { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.lesson-item strong { font: 500 16px var(--serif); color: var(--charcoal-brown); }
+.lesson-item span { color: var(--muted); font-size: 12px; }
+
+/* 모바일 반응형 처리 */
+@media (max-width: 850px) {
+  .lesson-content-card {
+    padding: 28px 20px;
+    border-radius: 12px;
+  }
+}
+
+/* 카드 슬라이더 */
+.lesson-photo { 
+  position: relative;
+  height: 440px; 
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 16px 36px var(--brown-shadow-10);
+}
+
+.card-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.card-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+  opacity: 0;
+  animation: lessonSyncLoop 15s infinite ease-in-out;
+}
+
+.card-slide-1 { animation-delay: 0s; }
+.card-slide-2 { animation-delay: 5s; }
+.card-slide-3 { animation-delay: 10s; }
+
+/* 15초(5초 * 3장) 무한 루프 애니메이션 */
+@keyframes lessonSyncLoop {
+  0% { opacity: 0; }
+  4% { opacity: 1; }
+  33.33% { opacity: 1; }
+  37.33% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
 .lesson-list { margin: 28px 0; border-top: 1px solid var(--line); }
 .lesson-item { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--line); }
 .lesson-item strong { font: 500 16px var(--serif); color: var(--charcoal-brown); }
 .lesson-item span { color: var(--muted); font-size: 12px; }
-
-/* ===================================================
-   5. QUOTE BANNER (4번째 파트 - 인용구 배너)
-   =================================================== */
+/* 5. QUOTE BANNER */
 .quote {
   width: 100%; text-align: center; color: var(--ivory); align-items: center;
   background: linear-gradient(var(--brown-overlay-85), var(--brown-overlay-85)),
@@ -321,9 +357,7 @@
 .quote blockquote { max-width: 800px; margin: 20px auto 16px; font: 500 clamp(24px, 3.5vw, 42px)/1.5 var(--serif); }
 .quote p { color: var(--white-muted-70); font-size: 13px; }
 
-/* ===================================================
-   6. LOCATION (5번째 파트 - 오시는 길)
-   =================================================== */
+/* 6. LOCATION */
 .location { background: var(--paper); width: 100%; align-items: center; }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8%; align-items: center; }
 .contact-photo { height: 420px; }
@@ -334,16 +368,6 @@
 .info-row span { color: var(--charcoal-brown); font-size: 13px; line-height: 1.7; }
 .contact-actions { display: flex; gap: 12px; margin-top: 24px; }
 
-/* ===================================================
-   7. CONTACT & RESERVATION (예약 및 문의)
-   =================================================== */
-.contact-box { background: var(--ivory); width: 100%; text-align: center; align-items: center; }
-.contact-card {
-  background: var(--paper); border: 1px solid var(--line); border-radius: 6px;
-  padding: 60px 40px; max-width: 780px; margin: 0 auto;
-  box-shadow: 0 10px 30px var(--brown-shadow-04);
-}
-
 /* FOOTER */
 footer { position: relative; z-index: 10; padding: 40px 0; background: var(--charcoal-brown); color: var(--ivory); }
 .footer-inner { display: flex; justify-content: space-between; align-items: end; gap: 30px; }
@@ -351,10 +375,33 @@ footer { position: relative; z-index: 10; padding: 40px 0; background: var(--cha
 .footer-sub { margin-top: 6px; color: var(--white-muted-50); font-size: 10px; letter-spacing: .18em; }
 .footer-right { color: var(--white-muted-65); font-size: 11px; line-height: 1.8; text-align: right; }
 
-/* ===================================================
-   RESPONSIVE LAYOUT + MOBILE MEDIA QUERIES
-   =================================================== */
-:where(#home-track, #about-track, #ensemble-track, #lesson-track, #quote-track, #location-track, #contact-track) {
+@media (max-width: 850px) {
+  .pin-track { height: auto; }
+  .pinned-section { position: relative; height: auto; padding: 100px 0 60px; min-height: 100vh; }
+  .header-inner { flex-wrap: wrap; padding: 10px 0; }
+  .nav { order: 3; width: 100%; overflow-x: auto; padding-bottom: 5px; }
+  .intro-grid, .lesson-grid, .contact-grid, .ensemble-grid { grid-template-columns: 1fr; gap: 30px; }
+  .ensemble-card img, .intro-image, .lesson-photo, .contact-photo { height: 260px; }
+
+  .hero-top-left-widget { top: 105px; left: 20px; }
+  .fixed-music-title { font-size: 50px; }
+  .rotating-text-box { height: 65px; }
+  .rotating-prefix { height: 65px; line-height: 65px; font-size: 50px; }
+  .rotating-text-list { height: 65px; }
+  .rotating-item { flex-basis: 65px; height: 65px; line-height: 65px; font-size: 50px; }
+  
+  @keyframes rotateTextLoop125px {
+    0%, 25% { transform: translateY(0); }
+    33.333%, 58.333% { transform: translateY(-65px); }
+    66.666%, 91.666% { transform: translateY(-130px); }
+    100% { transform: translateY(0); }
+  }
+  .hero-bottom-right-h1 { right: 20px; bottom: 30px; }
+  .h1-line1 { white-space: normal; width: auto; border: 0; animation: none; }
+  .h1-line2 { opacity: 1; transform: none; animation: none; }
+}
+
+:where(#home-track, #about-track, #ensemble-track, #lesson-track, #quote-track, #location-track) {
   scroll-margin-top: 82px;
 }
 
@@ -366,7 +413,6 @@ footer { position: relative; z-index: 10; padding: 40px 0; background: var(--cha
 
 .menu-toggle, .menu-button { display: none; }
 
-/* Tablet */
 @media (max-width: 1024px) {
   .wrap { width: min(100% - 48px, 900px); }
   .header-inner { gap: 18px; }
@@ -382,14 +428,10 @@ footer { position: relative; z-index: 10; padding: 40px 0; background: var(--cha
   .card-info { padding: 16px; }
 }
 
-/* Mobile */
 @media (max-width: 850px) {
   .wrap { width: calc(100% - 40px); }
   .pin-track { height: auto; }
-  .pinned-section {
-    position: relative; top: auto; height: auto; min-height: 0;
-    padding: 108px 0 64px; overflow: hidden;
-  }
+  .pinned-section { position: relative; top: auto; height: auto; min-height: 0; padding: 108px 0 64px; overflow: hidden; }
   #home-track .pinned-section { min-height: 100svh; padding: 0; }
   .header-inner {
     min-height: 72px; display: grid; grid-template-columns: 40px minmax(0, 1fr) auto;
@@ -448,14 +490,8 @@ footer { position: relative; z-index: 10; padding: 40px 0; background: var(--cha
   .lesson-item { gap: 12px; flex-wrap: wrap; }
   .lesson-item span { text-align: right; }
   .quote blockquote { font-size: clamp(23px, 5.5vw, 34px); }
-  .contact-card { padding: 42px 24px; }
   .footer-inner { align-items: flex-start; flex-direction: column; gap: 22px; }
   .footer-right { text-align: left; }
-
-  /* 모바일 환경에서는 애니메이션 해제 처리 (가독성 향상) */
-  #about-track, #ensemble-track, #lesson-track, #quote-track, #location-track, #contact-track {
-    animation: none;
-  }
 }
 
 @media (max-width: 520px) {
@@ -492,7 +528,6 @@ footer { position: relative; z-index: 10; padding: 40px 0; background: var(--cha
   .contact-actions .button { flex: 1 1 auto; }
   .info-row { grid-template-columns: 76px 1fr; gap: 10px; }
   .info-row span { font-size: 12px; }
-  .contact-card { padding: 34px 18px; }
   .footer-right { font-size: 10px; }
 }
 
@@ -501,7 +536,11 @@ footer { position: relative; z-index: 10; padding: 40px 0; background: var(--cha
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
 
-.contact-intro-copy { max-width: 540px; margin: 0 auto 28px; }
-.contact-card-actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
 .intro-grid > *, .lesson-grid > *, .contact-grid > *, .ensemble-grid > *, .footer-inner > * { min-width: 0; }
 .photo-figure, .photo-figure img { max-width: 100%; }
+
+#lesson-track,
+#quote-track {
+  /* 기존 140vh의 스크롤 여백을 화면 높이(100vh)에 딱 맞추어 여백 제거 */
+  height: 100vh;
+}
