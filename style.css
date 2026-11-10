@@ -62,6 +62,48 @@
       position: relative;
     }
 
+    /* ===================================================
+       추가 아이디어 1: 라이브 상태 인디케이터 배지
+       =================================================== */
+    .hero-live-badge {
+      position: absolute;
+      top: 110px;
+      right: 40px;
+      z-index: 10;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(41, 37, 31, 0.6);
+      border: 1px solid rgba(217, 139, 69, 0.3);
+      border-radius: 20px;
+      backdrop-filter: blur(8px);
+      font-size: 11px;
+      color: var(--ivory);
+      pointer-events: none;
+    }
+
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--amber-orange);
+      border-radius: 50%;
+      animation: pulseGlow 1.5s infinite ease-in-out;
+    }
+
+    @keyframes pulseGlow {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(217, 139, 69, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(217, 139, 69, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(217, 139, 69, 0); }
+    }
+
+   
+    /* 모바일 반응형 처리 */
+    @media (max-width: 850px) {
+      .hero-live-badge { top: 90px; right: 20px; font-size: 10px; padding: 5px 10px; }
+      .hero-waveform { left: 20px; bottom: 85px; }
+    }
+
     /* [요청 1 반영] M의 왼쪽 끝과 C의 오른쪽 끝이 화면 양 끝에 딱 맞도록 극대화된 MUSIC 글자 */
     .music-giant-container {
       position: absolute;
@@ -198,37 +240,52 @@
       max-width: 650px;
     }
 
+    /* ===================================================
+       스크롤 진입 시 실행되는 H1 타이핑 & 페이드업 효과
+       =================================================== */
     .hero-bottom-right-h1 h1 {
       margin: 0;
       font-family: var(--serif);
       font-size: clamp(24px, 3.5vw, 48px);
       font-weight: 500;
       line-height: 1.35;
-      color: var(--white)FFF;
+      color: var(--white);
       text-shadow: 0 4px 18px var(--black-shadow-70);
     }
 
+    /* 첫 번째 줄: 스크롤 시 타이핑 시작 */
     .h1-line1 {
       display: inline-block;
       white-space: nowrap;
       overflow: hidden;
       border-right: 3px solid var(--amber-orange);
       width: 0;
-      animation: typingLine 2.2s steps(16, end) 0.3s forwards, blinkCursor 0.75s step-end 3 forwards;
+      /* 애니메이션을 대기 상태로 두었다가 트리거 */
+      animation: typingLine 2.2s steps(16, end) 0.5s forwards, blinkCursor 0.75s step-end 3 forwards;
     }
 
+    /* 두 번째 줄: 첫 줄 타이핑이 끝난 뒤 부드럽게 페이드 업 */
     .h1-line2 {
       display: block;
       color: var(--amber-orange);
       font-style: normal;
       opacity: 0;
       transform: translateY(20px);
-      animation: smoothFadeUp 1.6s cubic-bezier(0.16, 1, 0.3, 1) 2.0s forwards;
+      animation: smoothFadeUp 1.6s cubic-bezier(0.16, 1, 0.3, 1) 2.4s forwards;
     }
 
-    @keyframes typingLine { from { width: 0; } to { width: 100%; } }
-    @keyframes blinkCursor { from, to { border-color: transparent; } 50% { border-color: var(--amber-orange); } }
-    @keyframes smoothFadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes typingLine { 
+      from { width: 0; } 
+      to { width: 100%; } 
+    }
+    @keyframes blinkCursor { 
+      from, to { border-color: transparent; } 
+      50% { border-color: var(--amber-orange); } 
+    }
+    @keyframes smoothFadeUp { 
+      from { opacity: 0; transform: translateY(20px); } 
+      to { opacity: 1; transform: translateY(0); } 
+    }
 
     /* 2. ABOUT (단체소개) */
     .intro { background: var(--ivory); width: 100%; align-items: center; }
