@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="아마빌레 아카데미 - 함께 연주하고 배우며 음악을 즐기는 공간">
   <title>아마빌레 아카데미 | AMABILE ACADEMY</title>
+  <link rel="stylesheet" href="common.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,11 +13,15 @@
   <!-- NAVIGATION HEADER -->
   <header class="header">
     <div class="wrap header-inner">
+      <input class="menu-toggle" type="checkbox" id="menu-toggle" aria-label="메뉴 열기/닫기">
+      <label class="menu-button" for="menu-toggle" aria-label="모바일 메뉴 열기">
+        <span></span><span></span><span></span>
+      </label>
       <a class="brand" href="#home-track" aria-label="아마빌레 아카데미 홈">
         <span class="brand-mark">A</span>
         <span><span class="brand-name">아마빌레 아카데미</span><span class="brand-sub">AMABILE ACADEMY</span></span>
       </a>
-      <nav class="nav" aria-label="주요 메뉴">
+      <nav class="nav" id="primary-navigation" aria-label="주요 메뉴">
         <a href="#home-track">홈</a>
         <a href="#about-track">단체소개</a>
         <a href="#ensemble-track">앙상블소개</a>
@@ -34,9 +39,9 @@
     <div class="rotating-text-box">
       <span class="rotating-prefix">For</span>
       <div class="rotating-text-list">
-        <div class="rotating-item">me</div>
-        <div class="rotating-item">you</div>
-        <div class="rotating-item">us</div>
+        <div class="rotating-item">Me</div>
+        <div class="rotating-item">You</div>
+        <div class="rotating-item">Us</div>
       </div>
     </div>
   </div>
@@ -48,7 +53,7 @@
 
         <!-- [요청 1 반영] M의 왼쪽 끝과 C의 오른쪽 끝이 화면 가장자리에 닿는 초대형 MUSIC 마스킹 글자 -->
         <div class="music-giant-container">
-          <div class="music-giant-text">MUSIC</div>
+          <div class="music-giant-text" aria-hidden="true">MUSIC</div>
         </div>
 
         <!-- 오른쪽 하단 배치 H1 타이핑 효과 문구 -->
@@ -66,10 +71,10 @@
     <div class="pin-track" id="about-track">
       <section class="pinned-section intro">
         <div class="wrap intro-grid">
-          <div class="intro-image">
+          <figure class="intro-image photo-figure">
             <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=1100&q=85" alt="햇살이 비치는 피아노">
-            <div class="image-caption">Music is better<br>when shared.</div>
-          </div>
+            <figcaption class="image-caption">Music is better<br>when shared.</figcaption>
+          </figure>
           <div class="intro-text">
             <span class="eyebrow">About Amabile</span>
             <h2 class="section-title">좋아하는 음악을<br>함께 나누는 공간</h2>
@@ -94,15 +99,15 @@
           </div>
           <div class="ensemble-grid">
             <article class="ensemble-card">
-              <img src="https://images.unsplash.com/photo-1514119412350-e174d90d280e?auto=format&fit=crop&w=1000&q=85" alt="피아노 연주">
+              <figure class="photo-figure card-photo"><img src="https://images.unsplash.com/photo-1514119412350-e174d90d280e?auto=format&fit=crop&w=1000&q=85" alt="피아노 연주"><figcaption class="sr-only">피아노 연주</figcaption></figure>
               <div class="card-info"><span class="card-index">01 / PIANO</span><h3>피아노 앙상블</h3><p>두 대의 피아노와 다양한 악기 편성으로 함께 만들어가는 풍성한 하모니.</p></div>
             </article>
             <article class="ensemble-card">
-              <img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=900&q=85" alt="목관악기 연주">
+              <figure class="photo-figure card-photo"><img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=900&q=85" alt="목관악기 연주"><figcaption class="sr-only">목관악기 연주</figcaption></figure>
               <div class="card-info"><span class="card-index">02 / WOODWIND</span><h3>목관 앙상블</h3><p>클라리넷, 플루트 등 목관악기의 따뜻하고 다채로운 음색을 교류합니다.</p></div>
             </article>
             <article class="ensemble-card">
-              <img src="https://images.unsplash.com/photo-1519683109079-d5f539e1542f?auto=format&fit=crop&w=900&q=85" alt="현악기 연주">
+              <figure class="photo-figure card-photo"><img src="https://images.unsplash.com/photo-1519683109079-d5f539e1542f?auto=format&fit=crop&w=900&q=85" alt="현악기 연주"><figcaption class="sr-only">현악기 연주</figcaption></figure>
               <div class="card-info"><span class="card-index">03 / STRINGS</span><h3>현악 앙상블</h3><p>바이올린, 첼로 등 현악기의 섬세한 선율이 만나 완성하는 실내악의 감동.</p></div>
             </article>
           </div>
@@ -114,9 +119,10 @@
     <div class="pin-track" id="lesson-track">
       <section class="pinned-section lesson">
         <div class="wrap lesson-grid">
-          <div class="lesson-photo">
+          <figure class="lesson-photo photo-figure">
             <img src="https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2?auto=format&fit=crop&w=1100&q=85" alt="연습 공간">
-          </div>
+            <figcaption class="sr-only">아마빌레 아카데미의 음악 연습 공간</figcaption>
+          </figure>
           <div>
             <span class="eyebrow">Private Lesson</span>
             <h2 class="section-title">나의 음악을<br>조금 더 깊게</h2>
@@ -160,9 +166,10 @@
               <a class="button light" href="#contact-track">문의하기 <span class="arrow">↗</span></a>
             </div>
           </div>
-          <div class="contact-photo">
+          <figure class="contact-photo photo-figure">
             <img src="https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=1100&q=85" alt="아카데미 내부 공간">
-          </div>
+            <figcaption class="sr-only">아카데미 내부 공간</figcaption>
+          </figure>
         </div>
       </section>
     </div>
@@ -174,8 +181,8 @@
           <div class="contact-card">
             <span class="eyebrow">Start your music journey</span>
             <h2 class="section-title">함께 음악을 시작해 볼까요?</h2>
-            <p class="section-copy" style="max-width:540px; margin:0 auto 28px">앙상블 모임 참여 및 1:1 레슨 문의는 아래 버튼을 클릭하시면 상담 연결 페이지로 바로 연결됩니다.</p>
-            <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
+            <p class="section-copy contact-intro-copy">앙상블 모임 참여 및 1:1 레슨 문의는 아래 버튼을 클릭하시면 상담 연결 페이지로 바로 연결됩니다.</p>
+            <div class="contact-card-actions">
               <a class="button accent" href="https://map.naver.com/v5/search/%EB%8C%80%EA%B5%AC%20%EB%B6%81%EA%B5%AC%20%EC%A1%B0%EC%95%BD%EB%A1%9C14%EA%B8%B8%2017" target="_blank" rel="noopener">길찾기 (네이버 지도) <span class="arrow">↗</span></a>
               <a class="button" href="mailto:contact@amabile.academy">문의하기 (이메일 연결) <span class="arrow">↗</span></a>
             </div>
