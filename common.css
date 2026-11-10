@@ -31,7 +31,7 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  color: var(--charcoal-brown);
+  color: var(--paper);
   background: var(--paper);
   font-family: var(--sans);
   word-break: keep-all;
