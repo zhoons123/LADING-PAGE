@@ -62,49 +62,7 @@
       position: relative;
     }
 
-    /* ===================================================
-       추가 아이디어 1: 라이브 상태 인디케이터 배지
-       =================================================== */
-    .hero-live-badge {
-      position: absolute;
-      top: 110px;
-      right: 40px;
-      z-index: 10;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      background: rgba(41, 37, 31, 0.6);
-      border: 1px solid rgba(217, 139, 69, 0.3);
-      border-radius: 20px;
-      backdrop-filter: blur(8px);
-      font-size: 11px;
-      color: var(--ivory);
-      pointer-events: none;
-    }
-
-    .pulse-dot {
-      width: 6px;
-      height: 6px;
-      background: var(--amber-orange);
-      border-radius: 50%;
-      animation: pulseGlow 1.5s infinite ease-in-out;
-    }
-
-    @keyframes pulseGlow {
-      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(217, 139, 69, 0.7); }
-      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(217, 139, 69, 0); }
-      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(217, 139, 69, 0); }
-    }
-
-   
-    /* 모바일 반응형 처리 */
-    @media (max-width: 850px) {
-      .hero-live-badge { top: 90px; right: 20px; font-size: 10px; padding: 5px 10px; }
-      .hero-waveform { left: 20px; bottom: 85px; }
-    }
-
-    /* [요청 1 반영] M의 왼쪽 끝과 C의 오른쪽 끝이 화면 양 끝에 딱 맞도록 극대화된 MUSIC 글자 */
+    /* M의 왼쪽 끝과 C의 오른쪽 끝이 화면 양 끝에 딱 맞도록 극대화된 MUSIC 글자 */
     .music-giant-container {
       position: absolute;
       inset: 0;
@@ -120,7 +78,6 @@
     .music-giant-text {
       font-family: 'DM Sans', sans-serif;
       font-weight: 1000;
-      /* M과 C의 양끝이 뷰포트 가장자리에 닿는 초대형 크기 및 꽉 채움 비율 */
       font-size: min(35vw, 650px);
       line-height: 0.75;
       letter-spacing: -0.09em;
@@ -130,7 +87,6 @@
       text-align: center;
       white-space: nowrap;
 
-      /* Pure CSS Background Clip Hack */
       background-size: cover;
       background-position: center;
       -webkit-background-clip: text;
@@ -138,7 +94,6 @@
       background-clip: text;
       color: transparent;
 
-      /* 2초 주기로 4장의 고화질 사진이 무한 교체되는 애니메이션 */
       animation: giantBgSlide 8s infinite ease-in-out;
     }
 
@@ -160,20 +115,19 @@
       }
     }
 
-    /* [요청 2 반영] 위젯 X축 우측 이동 (left: 120px) & 두 번째 줄 글자 크기를 첫 줄과 동일하게 조정 (110px) */
     .hero-top-left-widget {
       position: absolute;
-      top: 100px; /* Y축 그대로 유지 */
-      left: 120px; /* X축 우측으로 이동 */
+      top: 100px;
+      left: 120px;
       z-index: 10;
       text-align: left;
-      color: var(--white)FFF;
+      color: var(--white);
       font-family: var(--serif);
       pointer-events: none;
     }
 
     .fixed-music-title {
-      font-size: 110px; /* 첫 번째 줄 110px */
+      font-size: 110px;
       font-weight: 700;
       letter-spacing: -.02em;
       line-height: 0.95;
@@ -182,7 +136,7 @@
 
     .rotating-text-box {
       margin-top: 10px;
-      height: 125px; /* 기존보다 15px 증가 */
+      height: 125px;
       display: flex;
       align-items: center;
       overflow: hidden;
@@ -196,7 +150,7 @@
       font-family: var(--serif);
       font-size: 110px;
       font-weight: 700;
-      color: var(--white)FFF;
+      color: var(--white);
       letter-spacing: -.02em;
       text-shadow: 0 4px 20px var(--black-shadow-70);
     }
@@ -222,7 +176,6 @@
       white-space: nowrap;
     }
 
-    /* me / you / us 세 단어만 125px 단위로 무한 반복 */
     @keyframes rotateTextLoop125px {
       0%, 25% { transform: translateY(0); }
       33.333%, 58.333% { transform: translateY(-125px); }
@@ -230,7 +183,6 @@
       100% { transform: translateY(0); }
     }
 
-    /* H1 문구: 오른쪽 하단 배치 & 스크롤 시 타이핑 반응 효과 */
     .hero-bottom-right-h1 {
       position: absolute;
       right: 40px;
@@ -240,9 +192,6 @@
       max-width: 650px;
     }
 
-    /* ===================================================
-       스크롤 진입 시 실행되는 H1 타이핑 & 페이드업 효과
-       =================================================== */
     .hero-bottom-right-h1 h1 {
       margin: 0;
       font-family: var(--serif);
@@ -253,18 +202,15 @@
       text-shadow: 0 4px 18px var(--black-shadow-70);
     }
 
-    /* 첫 번째 줄: 스크롤 시 타이핑 시작 */
     .h1-line1 {
       display: inline-block;
       white-space: nowrap;
       overflow: hidden;
       border-right: 3px solid var(--amber-orange);
       width: 0;
-      /* 애니메이션을 대기 상태로 두었다가 트리거 */
       animation: typingLine 2.2s steps(16, end) 0.5s forwards, blinkCursor 0.75s step-end 3 forwards;
     }
 
-    /* 두 번째 줄: 첫 줄 타이핑이 끝난 뒤 부드럽게 페이드 업 */
     .h1-line2 {
       display: block;
       color: var(--amber-orange);
@@ -365,7 +311,7 @@
       .intro-grid, .lesson-grid, .contact-grid, .ensemble-grid { grid-template-columns: 1fr; gap: 30px; }
       .ensemble-card img, .intro-image, .lesson-photo, .contact-photo { height: 260px; }
 
-      .hero-top-left-widget { top: 90px; left: 20px; }
+      .hero-top-left-widget { top: 105px; left: 20px; }
       .fixed-music-title { font-size: 50px; }
       .rotating-text-box { height: 65px; }
       .rotating-prefix {
@@ -425,7 +371,6 @@
   border: 0;
 }
 
-/* Hamburger is CSS-only; no JavaScript is used. */
 .menu-toggle,
 .menu-button { display: none; }
 
@@ -612,8 +557,6 @@
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
 
-
-/* Contact section details previously written as inline styles */
 .contact-intro-copy {
   max-width: 540px;
   margin: 0 auto 28px;
@@ -625,7 +568,6 @@
   flex-wrap: wrap;
 }
 
-/* Prevent grid and media content from forcing horizontal overflow */
 .intro-grid > *,
 .lesson-grid > *,
 .contact-grid > *,
