@@ -1,435 +1,418 @@
-/* FIXED HEADER */
-    .header {
-      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
-      background: var(--header-glass); border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(14px);
-    }
-    .header-inner {
-      min-height: 80px; display: flex; justify-content: space-between;
-      align-items: center; gap: 28px;
-    }
-    .brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-    .brand-mark {
-      width: 38px; height: 38px; display: grid; place-items: center;
-      border: 1px solid var(--amber-orange); border-radius: 50%;
-      color: var(--wood-brown); font: 600 17px var(--serif);
-    }
-    .brand-name { font: 600 16px var(--serif); letter-spacing: .04em; color: var(--charcoal-brown); }
-    .brand-sub { display: block; margin-top: 3px; color: var(--muted); font: 9px var(--sans); letter-spacing: .22em; }
-    .nav { display: flex; align-items: center; gap: clamp(15px, 2.3vw, 32px); }
-    .nav a { position: relative; font-size: 12px; color: var(--charcoal-brown); transition: color .2s; white-space: nowrap; padding: 8px 0; }
-    .nav a::after {
-      content: ""; position: absolute; left: 0; bottom: 2px; width: 100%; height: 1px;
-      background: var(--amber-orange); transform: scaleX(0); transform-origin: right; transition: transform .35s ease;
-    }
-    .nav a:hover::after { transform: scaleX(1); transform-origin: left; }
-    .nav a:hover { color: var(--amber-orange); }
-    .header-cta { min-height: 40px; padding: 0 16px; font-size: 11px; white-space: nowrap; }
-
-    /* ===================================================
-       OSPLY-STYLE PURE CSS PINNED SCREEN STACKING
-       =================================================== */
-    .pin-track {
-      position: relative;
-      height: 140vh;
-    }
-
-    .pinned-section {
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      width: 100%;
-      overflow: hidden;
-      display: flex;
-      box-shadow: 0 -20px 40px var(--brown-shadow-08);
-    }
-
-    #home-track { z-index: 1; }
-    #about-track { z-index: 2; }
-    #ensemble-track { z-index: 3; }
-    #lesson-track { z-index: 4; }
-    #quote-track { z-index: 5; }
-    #location-track { z-index: 6; }
-    #contact-track { z-index: 7; }
-
-    /* ===================================================
-       1. HERO SECTION (FULL SCREEN EDGE-TO-EDGE MUSIC MASK)
-       =================================================== */
-    .hero {
-      color: var(--white);
-      background: var(--charcoal-brown);
-      width: 100%; height: 100%;
-      position: relative;
-    }
-
-    /* ===================================================
-       추가 아이디어 1: 라이브 상태 인디케이터 배지
-       =================================================== */
-    .hero-live-badge {
-      position: absolute;
-      top: 110px;
-      right: 40px;
-      z-index: 10;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      background: rgba(41, 37, 31, 0.6);
-      border: 1px solid rgba(217, 139, 69, 0.3);
-      border-radius: 20px;
-      backdrop-filter: blur(8px);
-      font-size: 11px;
-      color: var(--ivory);
-      pointer-events: none;
-    }
-
-    .pulse-dot {
-      width: 6px;
-      height: 6px;
-      background: var(--amber-orange);
-      border-radius: 50%;
-      animation: pulseGlow 1.5s infinite ease-in-out;
-    }
-
-    @keyframes pulseGlow {
-      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(217, 139, 69, 0.7); }
-      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(217, 139, 69, 0); }
-      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(217, 139, 69, 0); }
-    }
-
-   
-    /* 모바일 반응형 처리 */
-    @media (max-width: 850px) {
-      .hero-live-badge { top: 90px; right: 20px; font-size: 10px; padding: 5px 10px; }
-      .hero-waveform { left: 20px; bottom: 85px; }
-    }
-
-    /* [요청 1 반영] M의 왼쪽 끝과 C의 오른쪽 끝이 화면 양 끝에 딱 맞도록 극대화된 MUSIC 글자 */
-    .music-giant-container {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1;
-      pointer-events: none;
-      width: 100vw;
-      overflow: hidden;
-    }
-
-    .music-giant-text {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 1000;
-      /* M과 C의 양끝이 뷰포트 가장자리에 닿는 초대형 크기 및 꽉 채움 비율 */
-      font-size: min(35vw, 650px);
-      line-height: 0.75;
-      letter-spacing: -0.09em;
-      text-transform: uppercase;
-      width: 100vw;
-      max-width: 100vw;
-      text-align: center;
-      white-space: nowrap;
-
-      /* Pure CSS Background Clip Hack */
-      background-size: cover;
-      background-position: center;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      color: transparent;
-
-      /* 2초 주기로 4장의 고화질 사진이 무한 교체되는 애니메이션 */
-      animation: giantBgSlide 8s infinite ease-in-out;
-    }
-
-    @keyframes giantBgSlide {
-      0%, 20% {
-        background-image: url("https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=2200&q=88");
-      }
-      25%, 45% {
-        background-image: url("https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=2200&q=88");
-      }
-      50%, 70% {
-        background-image: url("https://images.unsplash.com/photo-1612225330812-01a9c6b355ec?auto=format&fit=crop&w=2200&q=88");
-      }
-      75%, 95% {
-        background-image: url("https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=2200&q=88");
-      }
-      100% {
-        background-image: url("https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=2200&q=88");
-      }
-    }
-
-    /* [요청 2 반영] 위젯 X축 우측 이동 (left: 120px) & 두 번째 줄 글자 크기를 첫 줄과 동일하게 조정 (110px) */
-    .hero-top-left-widget {
-      position: absolute;
-      top: 100px; /* Y축 그대로 유지 */
-      left: 120px; /* X축 우측으로 이동 */
-      z-index: 10;
-      text-align: left;
-      color: var(--white)FFF;
-      font-family: var(--serif);
-      pointer-events: none;
-    }
-
-    .fixed-music-title {
-      font-size: 110px; /* 첫 번째 줄 110px */
-      font-weight: 700;
-      letter-spacing: -.02em;
-      line-height: 0.95;
-      text-shadow: 0 4px 20px var(--black-shadow-70);
-    }
-
-    .rotating-text-box {
-      margin-top: 10px;
-      height: 125px; /* 기존보다 15px 증가 */
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .rotating-prefix {
-      flex: 0 0 auto;
-      height: 125px;
-      line-height: 125px;
-      font-family: var(--serif);
-      font-size: 110px;
-      font-weight: 700;
-      color: var(--white)FFF;
-      letter-spacing: -.02em;
-      text-shadow: 0 4px 20px var(--black-shadow-70);
-    }
-
-    .rotating-text-list {
-      margin-left: 25px;
-      display: flex;
-      flex-direction: column;
-      height: 125px;
-      animation: rotateTextLoop125px 6s infinite ease-in-out;
-    }
-
-    .rotating-item {
-      flex: 0 0 125px;
-      height: 125px;
-      line-height: 125px;
-      font-family: var(--serif);
-      font-size: 110px;
-      font-weight: 700;
-      color: var(--amber-orange);
-      letter-spacing: -.01em;
-      text-shadow: 0 4px 20px var(--black-shadow-70);
-      white-space: nowrap;
-    }
-
-    /* me / you / us 세 단어만 125px 단위로 무한 반복 */
-    @keyframes rotateTextLoop125px {
-      0%, 25% { transform: translateY(0); }
-      33.333%, 58.333% { transform: translateY(-125px); }
-      66.666%, 91.666% { transform: translateY(-250px); }
-      100% { transform: translateY(0); }
-    }
-
-    /* H1 문구: 오른쪽 하단 배치 & 스크롤 시 타이핑 반응 효과 */
-    .hero-bottom-right-h1 {
-      position: absolute;
-      right: 40px;
-      bottom: 40px;
-      z-index: 5;
-      text-align: right;
-      max-width: 650px;
-    }
-
-    /* ===================================================
-       스크롤 진입 시 실행되는 H1 타이핑 & 페이드업 효과
-       =================================================== */
-    .hero-bottom-right-h1 h1 {
-      margin: 0;
-      font-family: var(--serif);
-      font-size: clamp(24px, 3.5vw, 48px);
-      font-weight: 500;
-      line-height: 1.35;
-      color: var(--white);
-      text-shadow: 0 4px 18px var(--black-shadow-70);
-    }
-
-    /* 첫 번째 줄: 스크롤 시 타이핑 시작 */
-    .h1-line1 {
-      display: inline-block;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 3px solid var(--amber-orange);
-      width: 0;
-      /* 애니메이션을 대기 상태로 두었다가 트리거 */
-      animation: typingLine 2.2s steps(16, end) 0.5s forwards, blinkCursor 0.75s step-end 3 forwards;
-    }
-
-    /* 두 번째 줄: 첫 줄 타이핑이 끝난 뒤 부드럽게 페이드 업 */
-    .h1-line2 {
-      display: block;
-      color: var(--amber-orange);
-      font-style: normal;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: smoothFadeUp 1.6s cubic-bezier(0.16, 1, 0.3, 1) 2.4s forwards;
-    }
-
-    @keyframes typingLine { 
-      from { width: 0; } 
-      to { width: 100%; } 
-    }
-    @keyframes blinkCursor { 
-      from, to { border-color: transparent; } 
-      50% { border-color: var(--amber-orange); } 
-    }
-    @keyframes smoothFadeUp { 
-      from { opacity: 0; transform: translateY(20px); } 
-      to { opacity: 1; transform: translateY(0); } 
-    }
-
-    /* 2. ABOUT (단체소개) */
-    .intro { background: var(--ivory); width: 100%; align-items: center; }
-    .intro-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 8%; align-items: center; }
-    .intro-image { position: relative; height: 440px; }
-    .intro-image img { height: 100%; border-radius: 4px; }
-    .image-caption {
-      position: absolute; right: -20px; bottom: 20px; padding: 18px 22px;
-      background: var(--paper); color: var(--wood-brown); font: 13px/1.7 var(--serif);
-      box-shadow: 0 12px 30px var(--brown-shadow-10);
-    }
-    .intro-signature { margin-top: 24px; color: var(--wood-brown); font: italic 20px var(--serif); }
-
-    /* 3. ENSEMBLE (앙상블소개) */
-    .ensemble { background: var(--paper); width: 100%; align-items: center; }
-    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 36px; }
-    .ensemble-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .ensemble-card { overflow: hidden; background: var(--ivory); border-radius: 4px; transition: transform .4s ease; border: 1px solid var(--line); }
-    .ensemble-card:hover { transform: translateY(-8px); }
-    .ensemble-card img { height: 250px; }
-    .card-info { padding: 20px; }
-    .card-index { color: var(--amber-orange); font-size: 10px; letter-spacing: .15em; font-weight: 700; }
-    .card-info h3 { margin: 8px 0; font: 500 20px var(--serif); color: var(--charcoal-brown); }
-    .card-info p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
-
-    /* 4. LESSON (레슨소개) */
-    .lesson { background: var(--ivory); width: 100%; align-items: center; }
-    .lesson-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8%; align-items: center; }
-    .lesson-photo { height: 440px; }
-    .lesson-photo img { height: 100%; border-radius: 4px; }
-    .lesson-list { margin: 28px 0; border-top: 1px solid var(--line); }
-    .lesson-item { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--line); }
-    .lesson-item strong { font: 500 16px var(--serif); color: var(--charcoal-brown); }
-    .lesson-item span { color: var(--muted); font-size: 12px; }
-
-    /* 5. QUOTE BANNER */
-    .quote {
-      width: 100%; text-align: center; color: var(--ivory); align-items: center;
-      background: linear-gradient(var(--brown-overlay-85), var(--brown-overlay-85)),
-      url("https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1800&q=85") center/cover;
-    }
-    .quote small { color: var(--amber-orange); letter-spacing: .25em; font-size: 10px; font-weight: 700; }
-    .quote blockquote { max-width: 800px; margin: 20px auto 16px; font: 500 clamp(24px, 3.5vw, 42px)/1.5 var(--serif); }
-    .quote p { color: var(--white-muted-70); font-size: 13px; }
-
-    /* 6. LOCATION (오시는 길) */
-    .location { background: var(--paper); width: 100%; align-items: center; }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8%; align-items: center; }
-    .contact-photo { height: 420px; }
-    .contact-photo img { height: 100%; border-radius: 4px; }
-    .info-list { margin: 24px 0; border-top: 1px solid var(--line); }
-    .info-row { display: grid; grid-template-columns: 90px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
-    .info-row b { color: var(--wood-brown); font-size: 12px; }
-    .info-row span { color: var(--charcoal-brown); font-size: 13px; line-height: 1.7; }
-    .contact-actions { display: flex; gap: 12px; margin-top: 24px; }
-
-    /* 7. CONTACT & RESERVATION (예약,문의) */
-    .contact-box { background: var(--ivory); width: 100%; text-align: center; align-items: center; }
-    .contact-card {
-      background: var(--paper); border: 1px solid var(--line); border-radius: 6px;
-      padding: 60px 40px; max-width: 780px; margin: 0 auto;
-      box-shadow: 0 10px 30px var(--brown-shadow-04);
-    }
-
-    /* FOOTER */
-    footer { position: relative; z-index: 10; padding: 40px 0; background: var(--charcoal-brown); color: var(--ivory); }
-    .footer-inner { display: flex; justify-content: space-between; align-items: end; gap: 30px; }
-    .footer-brand { font: 500 20px var(--serif); letter-spacing: .04em; }
-    .footer-sub { margin-top: 6px; color: var(--white-muted-50); font-size: 10px; letter-spacing: .18em; }
-    .footer-right { color: var(--white-muted-65); font-size: 11px; line-height: 1.8; text-align: right; }
-
-    @media (max-width: 850px) {
-      .pin-track { height: auto; }
-      .pinned-section { position: relative; height: auto; padding: 100px 0 60px; min-height: 100vh; }
-      .header-inner { flex-wrap: wrap; padding: 10px 0; }
-      .nav { order: 3; width: 100%; overflow-x: auto; padding-bottom: 5px; }
-      .intro-grid, .lesson-grid, .contact-grid, .ensemble-grid { grid-template-columns: 1fr; gap: 30px; }
-      .ensemble-card img, .intro-image, .lesson-photo, .contact-photo { height: 260px; }
-
-      .hero-top-left-widget { top: 90px; left: 20px; }
-      .fixed-music-title { font-size: 50px; }
-      .rotating-text-box { height: 65px; }
-      .rotating-prefix {
-        height: 65px;
-        line-height: 65px;
-        font-size: 50px;
-      }
-      .rotating-text-list { height: 65px; }
-      .rotating-item {
-        flex-basis: 65px;
-        height: 65px;
-        line-height: 65px;
-        font-size: 50px;
-      }
-      @keyframes rotateTextLoop125px {
-        0%, 25% { transform: translateY(0); }
-        33.333%, 58.333% { transform: translateY(-65px); }
-        66.666%, 91.666% { transform: translateY(-130px); }
-        100% { transform: translateY(0); }
-      }
-      .hero-bottom-right-h1 { right: 20px; bottom: 30px; }
-      .h1-line1 { white-space: normal; width: auto; border: 0; animation: none; }
-      .h1-line2 { opacity: 1; transform: none; animation: none; }
-    }
-
+/* FIXED HEADER (하단 테두리 제거 버전) */
+.header {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+  background: var(--header-glass); border-bottom: none;
+  backdrop-filter: blur(14px);
+}
+.header-inner {
+  min-height: 80px; display: flex; justify-content: space-between;
+  align-items: center; gap: 28px;
+}
+.brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.brand-mark {
+  width: 38px; height: 38px; display: grid; place-items: center;
+  border: 1px solid var(--amber-orange); border-radius: 50%;
+  color: var(--wood-brown); font: 600 17px var(--serif);
+}
+.brand-name { font: 600 16px var(--serif); letter-spacing: .04em; color: var(--charcoal-brown); }
+.brand-sub { display: block; margin-top: 3px; color: var(--muted); font: 9px var(--sans); letter-spacing: .22em; }
+.nav { display: flex; align-items: center; gap: clamp(15px, 2.3vw, 32px); }
+.nav a { position: relative; font-size: 12px; color: var(--charcoal-brown); transition: color .2s; white-space: nowrap; padding: 8px 0; }
+.nav a::after {
+  content: ""; position: absolute; left: 0; bottom: 2px; width: 100%; height: 1px;
+  background: var(--amber-orange); transform: scaleX(0); transform-origin: right; transition: transform .35s ease;
+}
+.nav a:hover::after { transform: scaleX(1); transform-origin: left; }
+.nav a:hover { color: var(--amber-orange); }
+.header-cta { min-height: 40px; padding: 0 16px; font-size: 11px; white-space: nowrap; }
 
 /* ===================================================
-   RESPONSIVE LAYOUT + SEMANTIC PHOTO ELEMENTS
+   OSPLY-STYLE PURE CSS PINNED SCREEN STACKING
    =================================================== */
-:where(#home-track, #about-track, #ensemble-track, #lesson-track, #quote-track, #location-track, #contact-track) {
-  scroll-margin-top: 82px;
+.pin-track {
+  position: relative;
+  height: 140vh;
 }
 
-.photo-figure {
-  margin: 0;
-  min-width: 0;
+.pinned-section {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  box-shadow: 0 -20px 40px var(--brown-shadow-08);
 }
-.photo-figure img {
+
+#home-track { z-index: 1; }
+#about-track { z-index: 2; }
+#ensemble-track { z-index: 3; }
+#lesson-track { z-index: 4; }
+#quote-track { z-index: 5; }
+#location-track { z-index: 6; }
+
+/* ===================================================
+   1. HERO SECTION
+   =================================================== */
+.hero {
+  color: var(--white);
+  background: var(--ivory);
+  width: 100%; height: 100%;
+  position: relative;
+}
+
+.music-giant-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  pointer-events: none;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.music-giant-text {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 1000;
+  font-size: min(35vw, 650px);
+  line-height: 0.75;
+  letter-spacing: -0.09em;
+  text-transform: uppercase;
+  width: 100vw;
+  max-width: 100vw;
+  text-align: center;
+  white-space: nowrap;
+
+  background-size: cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+
+  animation: giantBgSlide 8s infinite ease-in-out;
+}
+
+@keyframes giantBgSlide {
+  0%, 20% { background-image: url("https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=2200&q=88"); }
+  25%, 45% { background-image: url("https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=2200&q=88"); }
+  50%, 70% { background-image: url("https://images.unsplash.com/photo-1612225330812-01a9c6b355ec?auto=format&fit=crop&w=2200&q=88"); }
+  75%, 95% { background-image: url("https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=2200&q=88"); }
+  100% { background-image: url("https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=2200&q=88"); }
+}
+
+.hero-top-left-widget {
+  position: absolute;
+  top: 150px;
+  left: 100px;
+  z-index: 10;
+  text-align: left;
+  color: var(--charcoal-brown);
+  font-family: var(--serif);
+  pointer-events: none;
+}
+
+.fixed-music-title {
+  font-size: 110px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: 0.95;
+}
+
+.rotating-text-box {
+  margin-top: 10px;
+  height: 125px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.rotating-prefix {
+  flex: 0 0 auto;
+  height: 125px;
+  line-height: 125px;
+  font-family: var(--serif);
+  font-size: 110px;
+  font-weight: 700;
+  color: var(--charcoal-brown);
+  letter-spacing: -.02em;
+}
+
+.rotating-text-list {
+  margin-left: 25px;
+  display: flex;
+  flex-direction: column;
+  height: 125px;
+  animation: rotateTextLoop125px 6s infinite ease-in-out;
+}
+
+.rotating-item {
+  flex: 0 0 125px;
+  height: 125px;
+  line-height: 125px;
+  font-family: var(--serif);
+  font-size: 110px;
+  font-weight: 700;
+  color: var(--amber-orange);
+  letter-spacing: -.01em;
+  white-space: nowrap;
+}
+
+@keyframes rotateTextLoop125px {
+  0%, 25% { transform: translateY(0); }
+  33.333%, 58.333% { transform: translateY(-125px); }
+  66.666%, 91.666% { transform: translateY(-250px); }
+  100% { transform: translateY(0); }
+}
+
+.hero-bottom-right-h1 {
+  position: absolute;
+  right: 40px;
+  bottom: 40px;
+  z-index: 5;
+  text-align: right;
+  max-width: 650px;
+}
+
+.hero-bottom-right-h1 h1 {
+  margin: 0;
+  font-family: var('DM Sans');
+  font-size: clamp(48px, 3.5vw, 48px);
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--charcoal-brown);
+}
+
+.h1-line1 {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid var(--amber-orange);
+  width: 0;
+  animation: typingLine 2.2s steps(16, end) 0.5s forwards, blinkCursor 0.75s step-end 3 forwards;
+}
+
+.h1-line2 {
+  display: block;
+  color: var(--amber-orange);
+  font-style: normal;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: smoothFadeUp 1.6s cubic-bezier(0.16, 1, 0.3, 1) 2.4s forwards;
+}
+
+@keyframes typingLine { from { width: 0; } to { width: 100%; } }
+@keyframes blinkCursor { from, to { border-color: transparent; } 50% { border-color: var(--amber-orange); } }
+@keyframes smoothFadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* 2. ABOUT */
+.intro { background: var(--ivory); width: 100%; align-items: center; }
+.intro-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 8%; align-items: center; }
+.intro-image { position: relative; height: 440px; }
+.intro-image img { height: 100%; border-radius: 4px; }
+.image-caption {
+  position: absolute; right: -20px; bottom: 20px; padding: 18px 22px;
+  background: var(--paper); color: var(--wood-brown); font: 13px/1.7 var(--serif);
+  box-shadow: 0 12px 30px var(--brown-shadow-10);
+}
+.intro-signature { margin-top: 24px; color: var(--wood-brown); font: italic 20px var(--serif); }
+
+/* 3. ENSEMBLE */
+.ensemble { background: var(--paper); width: 100%; align-items: center; }
+.section-head { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 36px; }
+.ensemble-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.ensemble-card { overflow: hidden; background: var(--ivory); border-radius: 4px; transition: transform .4s ease; border: 1px solid var(--line); }
+.ensemble-card:hover { transform: translateY(-8px); }
+.ensemble-card img { height: 250px; }
+.card-info { padding: 20px; }
+.card-index { color: var(--amber-orange); font-size: 10px; letter-spacing: .15em; font-weight: 700; }
+.card-info h3 { margin: 8px 0; font: 500 20px var(--serif); color: var(--charcoal-brown); }
+.card-info p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+
+/* 4. LESSON (배경 블러 & 카드 슬라이드 5초 간격 무한 동기화) */
+.lesson { 
+  position: relative; 
+  background: var(--ivory); 
+  width: 100%; 
+  align-items: center; 
+  overflow: hidden;
+}
+
+/* 배경 블러 슬라이드 */
+.lesson-bg-slider {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bg-slide {
+  position: absolute;
+  inset: -40px; /* 블러 테두리 흰색 왜곡 방지 margin */
+  background-size: cover;
+  background-position: center;
+  filter: blur(1px) brightness(0.85);
+  opacity: 0;
+  animation: lessonSyncLoop 15s infinite ease-in-out;
+}
+
+.bg-slide-1 { background-image: url("images/room.jpg"); animation-delay: 0s; }
+.bg-slide-2 { background-image: url("images/cello.jpg"); animation-delay: 5s; }
+.bg-slide-3 { background-image: url("images/pianoroom.jpg"); animation-delay: 10s; }
+
+/* 배경 톤 가독성을 위한 반투명 오버레이 */
+.lesson-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(245, 240, 230, 0.45);
+  backdrop-filter: blur(10px);
+}
+
+.lesson-grid { 
+  position: relative;
+  z-index: 1;
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 5%; 
+  align-items: center; 
+}
+
+/* 글자 영역을 둥근 카드 박스 형태 만들기 */
+.lesson-content-card {
+  background: rgba(251, 249, 244, 0.82); /* 은은한 아이보리 반투명 배경 */
+  backdrop-filter: blur(12px); /* 글자 카드 뒤쪽에 살짝 들어가는 블러 효과 */
+  -webkit-backdrop-filter: blur(12px);
+  padding: 40px 36px;
+  border-radius: 30px; /* 둥근 테두리 */
+  border: 1px solid rgba(121, 84, 56, 0.15); /* 은은한 테두리선 */
+  box-shadow: 0 12px 32px rgba(41, 37, 31, 0.08); /* 부드러운 그림자 */
+}
+
+.lesson-list { margin: 24px 0; border-top: 1px solid var(--line); }
+.lesson-item { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.lesson-item strong { font: 500 16px var(--serif); color: var(--charcoal-brown); }
+.lesson-item span { color: var(--muted); font-size: 12px; }
+
+/* 모바일 반응형 처리 */
+@media (max-width: 850px) {
+  .lesson-content-card {
+    padding: 28px 20px;
+    border-radius: 12px;
+  }
+}
+
+/* 카드 슬라이더 */
+.lesson-photo { 
+  position: relative;
+  height: 440px; 
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 16px 36px var(--brown-shadow-10);
+}
+
+.card-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.card-slide {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 6px;
+  opacity: 0;
+  animation: lessonSyncLoop 15s infinite ease-in-out;
 }
-.card-photo {
-  height: 250px;
-  overflow: hidden;
+
+.card-slide-1 { animation-delay: 0s; }
+.card-slide-2 { animation-delay: 5s; }
+.card-slide-3 { animation-delay: 10s; }
+
+/* 15초(5초 * 3장) 무한 루프 애니메이션 */
+@keyframes lessonSyncLoop {
+  0% { opacity: 0; }
+  4% { opacity: 1; }
+  33.33% { opacity: 1; }
+  37.33% { opacity: 0; }
+  100% { opacity: 0; }
 }
+
+.lesson-list { margin: 28px 0; border-top: 1px solid var(--line); }
+.lesson-item { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.lesson-item strong { font: 500 16px var(--serif); color: var(--charcoal-brown); }
+.lesson-item span { color: var(--muted); font-size: 12px; }
+/* 5. QUOTE BANNER */
+.quote {
+  width: 100%; text-align: center; color: var(--ivory); align-items: center;
+  background: linear-gradient(var(--brown-overlay-85), var(--brown-overlay-85)),
+  url("https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1800&q=85") center/cover;
+}
+.quote small { color: var(--amber-orange); letter-spacing: .25em; font-size: 10px; font-weight: 700; }
+.quote blockquote { max-width: 800px; margin: 20px auto 16px; font: 500 clamp(24px, 3.5vw, 42px)/1.5 var(--serif); }
+.quote p { color: var(--white-muted-70); font-size: 13px; }
+
+/* 6. LOCATION */
+.location { background: var(--paper); width: 100%; align-items: center; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8%; align-items: center; }
+.contact-photo { height: 420px; }
+.contact-photo img { height: 100%; border-radius: 4px; }
+.info-list { margin: 24px 0; border-top: 1px solid var(--line); }
+.info-row { display: grid; grid-template-columns: 90px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.info-row b { color: var(--wood-brown); font-size: 12px; }
+.info-row span { color: var(--charcoal-brown); font-size: 13px; line-height: 1.7; }
+.contact-actions { display: flex; gap: 12px; margin-top: 24px; }
+
+/* FOOTER */
+footer { position: relative; z-index: 10; padding: 40px 0; background: var(--charcoal-brown); color: var(--ivory); }
+.footer-inner { display: flex; justify-content: space-between; align-items: end; gap: 30px; }
+.footer-brand { font: 500 20px var(--serif); letter-spacing: .04em; }
+.footer-sub { margin-top: 6px; color: var(--white-muted-50); font-size: 10px; letter-spacing: .18em; }
+.footer-right { color: var(--white-muted-65); font-size: 11px; line-height: 1.8; text-align: right; }
+
+@media (max-width: 850px) {
+  .pin-track { height: auto; }
+  .pinned-section { position: relative; height: auto; padding: 100px 0 60px; min-height: 100vh; }
+  .header-inner { flex-wrap: wrap; padding: 10px 0; }
+  .nav { order: 3; width: 100%; overflow-x: auto; padding-bottom: 5px; }
+  .intro-grid, .lesson-grid, .contact-grid, .ensemble-grid { grid-template-columns: 1fr; gap: 30px; }
+  .ensemble-card img, .intro-image, .lesson-photo, .contact-photo { height: 260px; }
+
+  .hero-top-left-widget { top: 105px; left: 20px; }
+  .fixed-music-title { font-size: 50px; }
+  .rotating-text-box { height: 65px; }
+  .rotating-prefix { height: 65px; line-height: 65px; font-size: 50px; }
+  .rotating-text-list { height: 65px; }
+  .rotating-item { flex-basis: 65px; height: 65px; line-height: 65px; font-size: 50px; }
+  
+  @keyframes rotateTextLoop125px {
+    0%, 25% { transform: translateY(0); }
+    33.333%, 58.333% { transform: translateY(-65px); }
+    66.666%, 91.666% { transform: translateY(-130px); }
+    100% { transform: translateY(0); }
+  }
+  .hero-bottom-right-h1 { right: 20px; bottom: 30px; }
+  .h1-line1 { white-space: normal; width: auto; border: 0; animation: none; }
+  .h1-line2 { opacity: 1; transform: none; animation: none; }
+}
+
+:where(#home-track, #about-track, #ensemble-track, #lesson-track, #quote-track, #location-track) {
+  scroll-margin-top: 82px;
+}
+
+.photo-figure { margin: 0; min-width: 0; }
+.photo-figure img { width: 100%; height: 100%; object-fit: cover; }
+.card-photo { height: 250px; overflow: hidden; }
 .card-photo img { height: 100%; }
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
-/* Hamburger is CSS-only; no JavaScript is used. */
-.menu-toggle,
-.menu-button { display: none; }
+.menu-toggle, .menu-button { display: none; }
 
-/* Tablet */
 @media (max-width: 1024px) {
   .wrap { width: min(100% - 48px, 900px); }
   .header-inner { gap: 18px; }
@@ -445,84 +428,33 @@
   .card-info { padding: 16px; }
 }
 
-/* Mobile and small tablets */
 @media (max-width: 850px) {
   .wrap { width: calc(100% - 40px); }
   .pin-track { height: auto; }
-  .pinned-section {
-    position: relative;
-    top: auto;
-    height: auto;
-    min-height: 0;
-    padding: 108px 0 64px;
-    overflow: hidden;
-  }
+  .pinned-section { position: relative; top: auto; height: auto; min-height: 0; padding: 108px 0 64px; overflow: hidden; }
   #home-track .pinned-section { min-height: 100svh; padding: 0; }
   .header-inner {
-    min-height: 72px;
-    display: grid;
-    grid-template-columns: 40px minmax(0, 1fr) auto;
-    align-items: center;
-    gap: 12px;
-    position: relative;
-    padding: 8px 0;
+    min-height: 72px; display: grid; grid-template-columns: 40px minmax(0, 1fr) auto;
+    align-items: center; gap: 12px; position: relative; padding: 8px 0;
   }
-  .menu-toggle {
-    display: block;
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-    pointer-events: none;
-  }
+  .menu-toggle { display: block; position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
   .menu-button {
-    display: flex;
-    grid-column: 1;
-    grid-row: 1;
-    width: 38px;
-    height: 38px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-    border: 1px solid var(--line);
-    border-radius: 3px;
-    background: var(--menu-button-bg);
-    z-index: 3;
+    display: flex; grid-column: 1; grid-row: 1; width: 38px; height: 38px;
+    flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+    cursor: pointer; border: 1px solid var(--line); border-radius: 3px;
+    background: var(--menu-button-bg); z-index: 3;
   }
-  .menu-button span {
-    display: block;
-    width: 17px;
-    height: 2px;
-    background: var(--wood-brown);
-    transition: transform .25s ease, opacity .2s ease;
-  }
-  .menu-toggle:focus-visible + .menu-button {
-    outline: 2px solid var(--amber-orange);
-    outline-offset: 3px;
-  }
+  .menu-button span { display: block; width: 17px; height: 2px; background: var(--wood-brown); transition: transform .25s ease, opacity .2s ease; }
+  .menu-toggle:focus-visible + .menu-button { outline: 2px solid var(--amber-orange); outline-offset: 3px; }
   .brand { grid-column: 2; grid-row: 1; gap: 9px; }
   .brand-mark { width: 34px; height: 34px; font-size: 15px; }
   .brand-name { font-size: 13px; }
   .brand-sub { font-size: 8px; }
   .header-cta { grid-column: 3; grid-row: 1; min-height: 36px; font-size: 10px; padding: 0 10px; }
   .nav {
-    display: none;
-    position: absolute;
-    top: calc(100% + 1px);
-    left: -20px;
-    right: -20px;
-    width: auto;
-    order: initial;
-    padding: 12px 20px 18px;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    overflow: visible;
-    background: var(--header-menu);
-    border-bottom: 1px solid var(--line);
-    box-shadow: 0 12px 24px var(--brown-shadow-10);
+    display: none; position: absolute; top: calc(100% + 1px); left: -20px; right: -20px;
+    width: auto; padding: 12px 20px 18px; flex-direction: column; align-items: stretch; gap: 0;
+    background: var(--header-menu); border-bottom: 1px solid var(--line); box-shadow: 0 12px 24px var(--brown-shadow-10);
   }
   .nav a { display: block; padding: 13px 4px; font-size: 13px; border-bottom: 1px solid var(--line); }
   .nav a:last-child { border-bottom: 0; }
@@ -540,24 +472,17 @@
   .hero-top-left-widget { top: 105px; left: 20px; }
   .fixed-music-title { font-size: clamp(44px, 10vw, 58px); }
   .rotating-text-box { height: 65px; }
-  .rotating-prefix {
-    height: 65px;
-    line-height: 65px;
-    font-size: clamp(44px, 10vw, 58px);
-  }
+  .rotating-prefix { height: 65px; line-height: 65px; font-size: clamp(44px, 10vw, 58px); }
   .rotating-text-list { height: 65px; margin-left: 12px; }
-  .rotating-item {
-    flex-basis: 65px;
-    height: 65px;
-    line-height: 65px;
-    font-size: clamp(44px, 10vw, 58px);
-  }
+  .rotating-item { flex-basis: 65px; height: 65px; line-height: 65px; font-size: clamp(44px, 10vw, 58px); }
+  
   @keyframes rotateTextLoop125px {
     0%, 25% { transform: translateY(0); }
     33.333%, 58.333% { transform: translateY(-65px); }
     66.666%, 91.666% { transform: translateY(-130px); }
     100% { transform: translateY(0); }
   }
+
   .hero-bottom-right-h1 { right: 20px; bottom: 28px; left: 20px; max-width: none; }
   .hero-bottom-right-h1 h1 { font-size: clamp(22px, 5vw, 34px); }
   .h1-line1 { white-space: normal; width: auto; border: 0; animation: none; }
@@ -565,7 +490,6 @@
   .lesson-item { gap: 12px; flex-wrap: wrap; }
   .lesson-item span { text-align: right; }
   .quote blockquote { font-size: clamp(23px, 5.5vw, 34px); }
-  .contact-card { padding: 42px 24px; }
   .footer-inner { align-items: flex-start; flex-direction: column; gap: 22px; }
   .footer-right { text-align: left; }
 }
@@ -589,6 +513,7 @@
   .rotating-prefix { height: 58px; line-height: 58px; font-size: 44px; }
   .rotating-text-list { height: 58px; }
   .rotating-item { flex-basis: 58px; height: 58px; line-height: 58px; font-size: 44px; }
+  
   @keyframes rotateTextLoop125px {
     0%, 25% { transform: translateY(0); }
     33.333%, 58.333% { transform: translateY(-58px); }
@@ -603,7 +528,6 @@
   .contact-actions .button { flex: 1 1 auto; }
   .info-row { grid-template-columns: 76px 1fr; gap: 10px; }
   .info-row span { font-size: 12px; }
-  .contact-card { padding: 34px 18px; }
   .footer-right { font-size: 10px; }
 }
 
@@ -612,28 +536,11 @@
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
 
+.intro-grid > *, .lesson-grid > *, .contact-grid > *, .ensemble-grid > *, .footer-inner > * { min-width: 0; }
+.photo-figure, .photo-figure img { max-width: 100%; }
 
-/* Contact section details previously written as inline styles */
-.contact-intro-copy {
-  max-width: 540px;
-  margin: 0 auto 28px;
-}
-.contact-card-actions {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-
-/* Prevent grid and media content from forcing horizontal overflow */
-.intro-grid > *,
-.lesson-grid > *,
-.contact-grid > *,
-.ensemble-grid > *,
-.footer-inner > * {
-  min-width: 0;
-}
-.photo-figure,
-.photo-figure img {
-  max-width: 100%;
+#lesson-track,
+#quote-track {
+  /* 기존 140vh의 스크롤 여백을 화면 높이(100vh)에 딱 맞추어 여백 제거 */
+  height: 100vh;
 }
