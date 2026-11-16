@@ -142,6 +142,11 @@ SCROLL-STACK SECTIONS
 .pin-track {
   position: relative;
   height: 100vh;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+html {
+  scroll-snap-type: y mandatory;
 }
 .pinned-section {
   position: sticky;
@@ -446,7 +451,8 @@ HERO
   position: absolute;
   inset: -18px;
   z-index: -2;
-  background: url("images/piano2.jpg") center / cover no-repeat;
+  background: url("images/piano2.jpg") center / 100% auto no-repeat;
+  animation: kenBurnsDirect 16s infinite alternate ease-in-out;
   filter: blur(7px);
   transform: scale(1.04);
 }
@@ -664,10 +670,76 @@ HERO
   font-weight: bold;
 }
 
-.rs-card-grid {
+.ensemble-carousel {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+.ensemble-nav {
+  position: absolute;
+  top: 205px;
+  z-index: 5;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--charcoal-brown);
+  box-shadow: 0 4px 14px var(--brown-shadow-10);
+  font: 28px/1 var(--serif);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+.ensemble-nav span {
+  display: block;
+  line-height: 1;
+  transform: translateY(-4px);
+}
+.ensemble-nav:hover {
+  transform: translateY(-50%) scale(1.08);
+  background: var(--wood-brown);
+  color: var(--paper);
+}
+.ensemble-nav.swiper-button-disabled {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+.ensemble-prev {
+  left: 0;
+}
+.ensemble-next {
+  right: 0;
+}
+.ensemble-swiper {
+  width: calc(100% - 108px);
+  height: 410px;
+  margin: 0 auto;
+  padding-bottom: 16px;
+  overflow: hidden;
+}
+.ensemble-swiper .swiper-slide {
+  width: calc((100% - 48px) / 3);
+  height: 410px;
+}
+.ensemble-carousel > .ensemble-pagination.swiper-pagination {
+  position: relative;
+  margin-top: 18px;
+}
+.ensemble-pagination .swiper-pagination-bullet {
+  background: var(--wood-brown);
+  opacity: 0.45;
+}
+.ensemble-pagination .swiper-pagination-bullet-active {
+  background: var(--amber-orange);
+  opacity: 1;
 }
 .rs-card {
   background: var(--ivory);
@@ -741,7 +813,7 @@ HERO
   transform: scale(1.12);
   filter: blur(6px);
 }
-.ensemble-card:hover {
+.ensemble-card[data-aos="zoom-in"]:hover {
   transform: translateY(-8px);
   box-shadow: 0 16px 32px var(--brown-shadow-10);
 }
@@ -861,11 +933,13 @@ HERO
 .bg-slide {
   position: absolute;
   inset: -40px;
-  background-size: cover;
+  background-size: 100% auto;
   background-position: center;
   filter: blur(1px) brightness(0.85);
   opacity: 0;
-  animation: lessonSyncLoop 15s infinite ease-in-out;
+  animation:
+    lessonSyncLoop 15s infinite ease-in-out,
+    kenBurnsDirect 16s infinite alternate ease-in-out;
 }
 .bg-slide-1 {
   background-image: url("images/room.jpg");
@@ -1020,19 +1094,12 @@ HERO
   position: relative;
   width: 100%;
   align-items: center;
-  background-image: url("images/academy.jpg");
-  background-size: cover;
+  background-image:
+    linear-gradient(rgba(41, 37, 31, 0.75), rgba(41, 37, 31, 0.75)),
+    url("images/pianotable.jpg");
   background-position: center;
+  background-size: 100% auto;
   isolation: isolate;
-}
-.location::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: rgba(245, 240, 230, 0.7);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 .location > .wrap {
   position: relative;
@@ -1240,6 +1307,7 @@ FOOTER
 footer {
   position: relative;
   z-index: 10;
+  scroll-snap-align: end;
   padding: 40px 0;
   background: var(--charcoal-brown);
   color: var(--ivory);
@@ -1364,8 +1432,11 @@ RESPONSIVE  1024px
     flex-basis: 140px;
     width: 140px;
   }
-  .ensemble-grid {
-    gap: 14px;
+  .ensemble-swiper {
+    width: calc(100% - 108px);
+  }
+  .ensemble-swiper .swiper-slide {
+    width: calc((100% - 28px) / 3);
   }
   .card-photo {
     height: 210px;
@@ -1506,8 +1577,7 @@ RESPONSIVE  850px
 
   .intro-grid,
   .lesson-grid,
-  .contact-grid,
-  .ensemble-grid {
+  .contact-grid {
     grid-template-columns: 1fr;
     gap: 28px;
   }
@@ -1537,9 +1607,16 @@ RESPONSIVE  850px
   .card-photo {
     height: clamp(210px, 55vw, 300px);
   }
-  .rs-card-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+  .ensemble-swiper {
+    width: calc(100% - 88px);
+  }
+  .ensemble-nav {
+    width: 36px;
+    height: 36px;
+    font-size: 26px;
+  }
+  .ensemble-swiper .swiper-slide {
+    width: calc(100% - 40px);
   }
   .rs-card-photo {
     height: 200px;

@@ -9,7 +9,12 @@
     />
     <title>아마빌레 아카데미 | AMABILE ACADEMY</title>
     <link rel="stylesheet" href="common.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
   </head>
   <body>
     <!-- NAVIGATION HEADER -->
@@ -81,7 +86,7 @@
         <section class="pinned-section intro">
           <div class="section-num" aria-hidden="true">02 — ABOUT</div>
           <div class="wrap intro-grid">
-            <div class="intro-text">
+            <div class="intro-text" data-aos="fade-up">
               <span class="eyebrow">About Amabile</span>
               <h2 class="section-title">
                 좋아하는 음악을<br />함께 나누는 공간
@@ -99,7 +104,7 @@
               <div class="intro-signature">Amabile, with love for music.</div>
             </div>
 
-            <div class="instrument-ratio-box">
+            <div class="instrument-ratio-box" data-aos="fade-up">
               <div class="ratio-header">
                 <span>MEMBERS INSTRUMENT RATIO</span>
                 <span class="ratio-subtitle">함께하는 멤버들의 악기 구성</span>
@@ -144,7 +149,12 @@
       <div class="pin-track" id="ensemble-track">
         <section class="pinned-section ensemble">
           <div class="wrap">
-            <div class="section-head">
+            <div
+              class="section-head"
+              data-aos="zoom-in"
+              data-aos-duration="500"
+              data-aos-delay="0"
+            >
               <div>
                 <span class="eyebrow">Together in harmony</span>
                 <h2 class="section-title">함께할 때 더 아름다운 음악</h2>
@@ -154,7 +164,12 @@
               </p>
             </div>
 
-            <div class="rehearsal-ticker">
+            <div
+              class="rehearsal-ticker"
+              data-aos="zoom-in"
+              data-aos-duration="500"
+              data-aos-delay="80"
+            >
               <span class="ticker-badge">NOW REHEARSING</span>
               <div class="ticker-track">
                 <span>모차르트 클라리넷 5중주 A장조 K.581</span>
@@ -166,60 +181,143 @@
               </div>
             </div>
 
-            <div class="ensemble-grid rs-card-grid">
-              <article class="ensemble-card rs-card">
-                <figure class="photo-figure card-photo rs-card-photo">
-                  <img
-                    src="https://images.unsplash.com/photo-1514119412350-e174d90d280e?auto=format&fit=crop&w=1000&q=85"
-                    alt="피아노 연주"
-                  />
-                  <figcaption class="sr-only">피아노 연주</figcaption>
-                </figure>
-                <div class="card-info rs-card-info">
-                  <span class="card-index">01 / PIANO</span>
-                  <h3>피아노 앙상블</h3>
-                  <p>
-                    두 대의 피아노와 다양한 악기 편성으로 함께 만들어가는 풍성한
-                    하모니.
-                  </p>
-                </div>
-              </article>
+            <div class="ensemble-carousel">
+              <div
+                class="swiper ensemble-grid rs-card-grid ensemble-swiper"
+                aria-label="앙상블 카드"
+              >
+                <div class="swiper-wrapper">
+                  <article
+                    class="swiper-slide ensemble-card rs-card"
+                    data-aos="zoom-in"
+                    data-aos-duration="500"
+                    data-aos-delay="160"
+                  >
+                    <figure class="photo-figure card-photo rs-card-photo">
+                      <img
+                        src="https://images.unsplash.com/photo-1514119412350-e174d90d280e?auto=format&fit=crop&w=1000&q=85"
+                        alt="피아노 연주"
+                      />
+                      <figcaption class="sr-only">피아노 연주</figcaption>
+                    </figure>
+                    <div class="card-info rs-card-info">
+                      <span class="card-index">01 / PIANO</span>
+                      <h3>피아노 앙상블</h3>
+                      <p>
+                        두 대의 피아노와 다양한 악기 편성으로 함께 만들어가는
+                        풍성한 하모니.
+                      </p>
+                    </div>
+                  </article>
 
-              <article class="ensemble-card rs-card">
-                <figure class="photo-figure card-photo rs-card-photo">
-                  <img src="images/woodwind.jpg" alt="목관악기 연주" />
-                  <figcaption class="sr-only">목관악기 연주</figcaption>
-                </figure>
-                <div class="card-info rs-card-info">
-                  <span class="card-index">02 / WOODWIND</span>
-                  <h3>목관 앙상블</h3>
-                  <p>
-                    클라리넷, 플루트 등 목관악기의 따뜻하고 다채로운 음색을
-                    교류합니다.
-                  </p>
-                </div>
-              </article>
+                  <article
+                    class="swiper-slide ensemble-card rs-card"
+                    data-aos="zoom-in"
+                    data-aos-duration="500"
+                    data-aos-delay="240"
+                  >
+                    <figure class="photo-figure card-photo rs-card-photo">
+                      <img src="images/woodwind.jpg" alt="목관악기 연주" />
+                      <figcaption class="sr-only">목관악기 연주</figcaption>
+                    </figure>
+                    <div class="card-info rs-card-info">
+                      <span class="card-index">02 / WOODWIND</span>
+                      <h3>목관 앙상블</h3>
+                      <p>
+                        클라리넷, 플루트 등 목관악기의 따뜻하고 다채로운 음색을
+                        교류합니다.
+                      </p>
+                    </div>
+                  </article>
 
-              <article class="ensemble-card rs-card">
-                <figure class="photo-figure card-photo rs-card-photo">
-                  <img
-                    src="https://images.unsplash.com/photo-1519683109079-d5f539e1542f?auto=format&fit=crop&w=900&q=85"
-                    alt="현악기 연주"
-                  />
-                  <figcaption class="sr-only">현악기 연주</figcaption>
-                </figure>
-                <div class="card-info rs-card-info">
-                  <span class="card-index">03 / STRINGS</span>
-                  <h3>현악 앙상블</h3>
-                  <p>
-                    바이올린, 첼로 등 현악기의 섬세한 선율이 만나 완성하는
-                    실내악의 감동.
-                  </p>
+                  <article
+                    class="swiper-slide ensemble-card rs-card"
+                    data-aos="zoom-in"
+                    data-aos-duration="500"
+                    data-aos-delay="320"
+                  >
+                    <figure class="photo-figure card-photo rs-card-photo">
+                      <img
+                        src="https://images.unsplash.com/photo-1519683109079-d5f539e1542f?auto=format&fit=crop&w=900&q=85"
+                        alt="현악기 연주"
+                      />
+                      <figcaption class="sr-only">현악기 연주</figcaption>
+                    </figure>
+                    <div class="card-info rs-card-info">
+                      <span class="card-index">03 / STRINGS</span>
+                      <h3>현악합주</h3>
+                      <p>
+                        바이올린, 첼로 등 현악기의 섬세한 선율이 만나 완성하는
+                        실내악의 감동.
+                      </p>
+                    </div>
+                  </article>
+
+                  <article
+                    class="swiper-slide ensemble-card rs-card"
+                    data-aos="zoom-in"
+                    data-aos-duration="500"
+                    data-aos-delay="400"
+                  >
+                    <figure class="photo-figure card-photo rs-card-photo">
+                      <img src="images/wind.jpg" alt="관악합주 연주" />
+                      <figcaption class="sr-only">관악합주 연주</figcaption>
+                    </figure>
+                    <div class="card-info rs-card-info">
+                      <span class="card-index">04 / WIND ENSEMBLE</span>
+                      <h3>관악합주</h3>
+                      <p>관악기의 조화로 만드는 풍성한 울림.</p>
+                    </div>
+                  </article>
+
+                  <article
+                    class="swiper-slide ensemble-card rs-card"
+                    data-aos="zoom-in"
+                    data-aos-duration="500"
+                    data-aos-delay="480"
+                  >
+                    <figure class="photo-figure card-photo rs-card-photo">
+                      <img src="images/piano.jpg" alt="독주 연주" />
+                      <figcaption class="sr-only">독주 연주</figcaption>
+                    </figure>
+                    <div class="card-info rs-card-info">
+                      <span class="card-index">05 / SOLO</span>
+                      <h3>독주</h3>
+                      <p>홀로 완성하는 나만의 선율.</p>
+                    </div>
+                  </article>
                 </div>
-              </article>
+              </div>
+              <button
+                class="ensemble-nav ensemble-prev"
+                type="button"
+                aria-label="이전 카드"
+              >
+                <span aria-hidden="true">‹</span>
+              </button>
+              <button
+                class="ensemble-nav ensemble-next"
+                type="button"
+                aria-label="다음 카드"
+              >
+                <span aria-hidden="true">›</span>
+              </button>
+              <div
+                class="swiper-pagination ensemble-pagination"
+                data-aos="zoom-in"
+                data-aos-duration="500"
+                data-aos-delay="560"
+              ></div>
             </div>
 
-            <div class="marquee-band" aria-hidden="true">
+            <div
+              class="marquee-band"
+              aria-hidden="true"
+              data-aos="zoom-in"
+              data-aos-anchor=".rehearsal-ticker"
+              data-aos-duration="500"
+              data-aos-delay="80"
+            >
               <div class="marquee-track">
                 <span class="marquee-item">Piano Ensemble</span>
                 <span class="marquee-item">Woodwind Ensemble</span>
@@ -250,7 +348,7 @@
           </div>
 
           <div class="wrap lesson-grid">
-            <figure class="lesson-photo photo-figure">
+            <figure class="lesson-photo photo-figure" data-aos="fade-right">
               <div class="card-slider">
                 <img
                   class="card-slide card-slide-1"
@@ -273,7 +371,7 @@
               </figcaption>
             </figure>
 
-            <div class="lesson-content-card">
+            <div class="lesson-content-card" data-aos="fade-left">
               <span class="eyebrow">Private Lesson</span>
               <h2 class="section-title">나의 음악을<br />조금 더 깊게</h2>
               <p class="section-copy">
@@ -304,7 +402,7 @@
       <!-- SECTION 5: QUOTE -->
       <div class="pin-track" id="quote-track">
         <section class="pinned-section quote">
-          <div class="wrap">
+          <div class="wrap" data-aos="zoom-in">
             <small>THE JOY OF MAKING MUSIC</small>
             <blockquote>
               “음악은 혼자 완성하는 것이 아니라,<br />함께 나누며 더
@@ -319,7 +417,11 @@
       <div class="pin-track" id="location-track">
         <section class="pinned-section location">
           <div class="wrap contact-grid">
-            <div class="location-text-box">
+            <div
+              class="location-text-box"
+              data-aos="fade-up"
+              data-aos-duration="1200"
+            >
               <span class="eyebrow">Visit Amabile</span>
               <h2 class="section-title">
                 음악이 시작되는 곳,<br />아마빌레 아카데미
@@ -338,7 +440,11 @@
               </div>
             </div>
 
-            <div class="contact-form-box">
+            <div
+              class="contact-form-box"
+              data-aos="fade-up"
+              data-aos-duration="1200"
+            >
               <h3 class="form-title">방문 및 상담 신청</h3>
               <form class="amabile-form" onsubmit="return false;">
                 <div class="form-group">
@@ -506,5 +612,42 @@
         </div>
       </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      new Swiper(".ensemble-swiper", {
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        freeMode: true,
+        spaceBetween: 24,
+        breakpoints: {
+          851: {
+            spaceBetween: 14,
+          },
+          1025: {
+            spaceBetween: 16,
+          },
+        },
+        pagination: {
+          el: ".ensemble-pagination",
+          clickable: true,
+        },
+        navigation: {
+          prevEl: ".ensemble-prev",
+          nextEl: ".ensemble-next",
+        },
+      });
+
+      AOS.init({
+        duration: 800,
+        easing: "ease-out-cubic",
+        offset: Math.round(window.innerHeight / 2),
+        once: false,
+        mirror: true,
+        disable: () =>
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+      });
+    </script>
   </body>
 </html>
