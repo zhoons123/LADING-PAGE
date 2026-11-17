@@ -25,22 +25,92 @@ new Swiper(".ensemble-swiper", {
 
 const ensemblePlayer = new Audio();
 const ensembleCards = document.querySelectorAll(".ensemble-card");
+const backgroundMusic = document.querySelector("#background-music");
+const backgroundMusicToggle = document.querySelector("#background-music-toggle");
+const backgroundMusicIcon = backgroundMusicToggle.querySelector(
+  ".music-player-icon",
+);
+const backgroundMusicLabel = backgroundMusicToggle.querySelector(
+  ".music-player-label",
+);
+const backgroundMusicStatus = document.querySelector("#background-music-status");
 let activeAudioCard = null;
+
+function setBackgroundMusicState(isPlaying) {
+  backgroundMusicToggle.setAttribute("aria-pressed", String(isPlaying));
+  backgroundMusicToggle.setAttribute(
+    "aria-label",
+    `${isPlaying ? "Pause" : "Play"} background music`,
+  );
+  backgroundMusicIcon.textContent = isPlaying ? "⏸" : "▶";
+  backgroundMusicLabel.textContent = isPlaying ? "Pause" : "Play";
+}
+
+function playBackgroundMusic() {
+  backgroundMusic
+    .play()
+    .then(() => {
+      backgroundMusicStatus.textContent = "";
+      setBackgroundMusicState(true);
+    })
+    .catch((error) => {
+      setBackgroundMusicState(false);
+      if (error.name === "NotAllowedError") {
+        backgroundMusicStatus.textContent =
+          "자동 재생이 차단되었습니다. 버튼을 눌러 배경음악을 재생해 주세요.";
+        return;
+      }
+
+      console.error("Could not play background music.", error);
+      backgroundMusicStatus.textContent =
+        "배경음악을 재생할 수 없습니다. 다시 시도해 주세요.";
+    });
+}
+
+backgroundMusic.addEventListener("play", () => {
+  setBackgroundMusicState(true);
+});
+backgroundMusic.addEventListener("pause", () => {
+  setBackgroundMusicState(false);
+});
+backgroundMusic.addEventListener("error", () => {
+  backgroundMusicStatus.textContent =
+    "배경음악 파일을 불러오지 못했습니다.";
+});
+backgroundMusicToggle.addEventListener("click", () => {
+  if (!backgroundMusic.paused) {
+    backgroundMusic.pause();
+    return;
+  }
+
+  if (activeAudioCard) {
+    setAudioButtonState(activeAudioCard, false);
+    activeAudioCard = null;
+    ensemblePlayer.pause();
+  }
+  playBackgroundMusic();
+});
+
+playBackgroundMusic();
 
 function setAudioButtonState(card, isPlaying) {
   const button = card.querySelector(".card-audio-toggle");
   const label = button.querySelector(".card-audio-label");
-  const action = isPlaying ? "정지" : "재생";
+  const action = isPlaying ? "Stop" : "Play";
 
   label.textContent = action;
   button.setAttribute("aria-pressed", String(isPlaying));
   button.setAttribute(
     "aria-label",
-    `${card.querySelector("h3").textContent} 음악 ${action}`,
+    `${action} ${card.querySelector("h3").textContent} music`,
   );
 }
 
 function playEnsembleCard(card) {
+  if (!backgroundMusic.paused) {
+    backgroundMusic.pause();
+  }
+
   if (activeAudioCard !== card) {
     ensemblePlayer.pause();
     if (activeAudioCard) {

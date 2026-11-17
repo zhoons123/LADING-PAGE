@@ -235,11 +235,11 @@
                       <button
                         class="card-audio-toggle swiper-no-swiping"
                         type="button"
-                        aria-label="피아노 앙상블 음악 재생"
+                        aria-label="Play 피아노 앙상블 music"
                         aria-pressed="false"
                       >
                         <span aria-hidden="true">▶</span>
-                        <span class="card-audio-label">재생</span>
+                        <span class="card-audio-label">Play</span>
                       </button>
                     </div>
                   </article>
@@ -265,11 +265,11 @@
                       <button
                         class="card-audio-toggle swiper-no-swiping"
                         type="button"
-                        aria-label="목관 앙상블 음악 재생"
+                        aria-label="Play 목관 앙상블 music"
                         aria-pressed="false"
                       >
                         <span aria-hidden="true">▶</span>
-                        <span class="card-audio-label">재생</span>
+                        <span class="card-audio-label">Play</span>
                       </button>
                     </div>
                   </article>
@@ -298,11 +298,11 @@
                       <button
                         class="card-audio-toggle swiper-no-swiping"
                         type="button"
-                        aria-label="현악합주 음악 재생"
+                        aria-label="Play 현악합주 music"
                         aria-pressed="false"
                       >
                         <span aria-hidden="true">▶</span>
-                        <span class="card-audio-label">재생</span>
+                        <span class="card-audio-label">Play</span>
                       </button>
                     </div>
                   </article>
@@ -325,11 +325,11 @@
                       <button
                         class="card-audio-toggle swiper-no-swiping"
                         type="button"
-                        aria-label="관악합주 음악 재생"
+                        aria-label="Play 관악합주 music"
                         aria-pressed="false"
                       >
                         <span aria-hidden="true">▶</span>
-                        <span class="card-audio-label">재생</span>
+                        <span class="card-audio-label">Play</span>
                       </button>
                     </div>
                   </article>
@@ -352,11 +352,11 @@
                       <button
                         class="card-audio-toggle swiper-no-swiping"
                         type="button"
-                        aria-label="독주 음악 재생"
+                        aria-label="Play 독주 music"
                         aria-pressed="false"
                       >
                         <span aria-hidden="true">▶</span>
-                        <span class="card-audio-label">재생</span>
+                        <span class="card-audio-label">Play</span>
                       </button>
                     </div>
                   </article>
@@ -675,6 +675,21 @@
       </div>
     </main>
 
+    <audio id="background-music" src="audio/bgm.mp3" autoplay loop preload="auto"></audio>
+    <aside class="music-player" aria-label="배경음악 플레이어">
+      <span class="music-player-title">BGM</span>
+      <button
+        class="music-player-toggle"
+        id="background-music-toggle"
+        type="button"
+        aria-label="Play background music"
+        aria-pressed="false"
+      >
+        <span class="music-player-icon" aria-hidden="true">▶</span>
+        <span class="music-player-label">Play</span>
+      </button>
+      <span class="sr-only" id="background-music-status" role="status" aria-live="polite"></span>
+    </aside>
     <a class="back-to-top" href="#home-track" aria-label="맨 위로 이동">♪</a>
 
     <footer>
