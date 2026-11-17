@@ -216,6 +216,7 @@
                     data-aos="zoom-in"
                     data-aos-duration="500"
                     data-aos-delay="160"
+                    data-audio="audio/Schubert_ Fantasie in F minor - Lucas &amp; Arthur Jussen [UyjzqPPXDcw].mp3"
                   >
                     <figure class="photo-figure card-photo rs-card-photo">
                       <img
@@ -231,6 +232,15 @@
                         두 대의 피아노와 다양한 악기 편성으로 함께 만들어가는
                         풍성한 하모니.
                       </p>
+                      <button
+                        class="card-audio-toggle swiper-no-swiping"
+                        type="button"
+                        aria-label="피아노 앙상블 음악 재생"
+                        aria-pressed="false"
+                      >
+                        <span aria-hidden="true">▶</span>
+                        <span class="card-audio-label">재생</span>
+                      </button>
                     </div>
                   </article>
 
@@ -239,6 +249,7 @@
                     data-aos="zoom-in"
                     data-aos-duration="500"
                     data-aos-delay="240"
+                    data-audio="audio/Mozart, Finale Molto allegro from Serenade No 10 for 13 Winds in B-flat major (Gran Partita K. 361). [5QXmR0FOiow].mp3"
                   >
                     <figure class="photo-figure card-photo rs-card-photo">
                       <img src="images/woodwind.jpg" alt="목관악기 연주" />
@@ -251,6 +262,15 @@
                         클라리넷, 플루트 등 목관악기의 따뜻하고 다채로운 음색을
                         교류합니다.
                       </p>
+                      <button
+                        class="card-audio-toggle swiper-no-swiping"
+                        type="button"
+                        aria-label="목관 앙상블 음악 재생"
+                        aria-pressed="false"
+                      >
+                        <span aria-hidden="true">▶</span>
+                        <span class="card-audio-label">재생</span>
+                      </button>
                     </div>
                   </article>
 
@@ -259,6 +279,7 @@
                     data-aos="zoom-in"
                     data-aos-duration="500"
                     data-aos-delay="320"
+                    data-audio="audio/Tchaikovsky - Serenade for Strings in C Major, Op.48 (Valse) [ZSGKRfEUqVk].mp3"
                   >
                     <figure class="photo-figure card-photo rs-card-photo">
                       <img
@@ -274,6 +295,15 @@
                         바이올린, 첼로 등 현악기의 섬세한 선율이 만나 완성하는
                         실내악의 감동.
                       </p>
+                      <button
+                        class="card-audio-toggle swiper-no-swiping"
+                        type="button"
+                        aria-label="현악합주 음악 재생"
+                        aria-pressed="false"
+                      >
+                        <span aria-hidden="true">▶</span>
+                        <span class="card-audio-label">재생</span>
+                      </button>
                     </div>
                   </article>
 
@@ -282,6 +312,7 @@
                     data-aos="zoom-in"
                     data-aos-duration="500"
                     data-aos-delay="400"
+                    data-audio="audio/First Suite for Military Band in E-Flat Major, Op. 28 No. 1, H. 105_ I. Chaconne [rCIVXEEuMqM].mp3"
                   >
                     <figure class="photo-figure card-photo rs-card-photo">
                       <img src="images/wind.jpg" alt="관악합주 연주" />
@@ -291,6 +322,15 @@
                       <span class="card-index">04 / WIND ENSEMBLE</span>
                       <h3>관악합주</h3>
                       <p>관악기의 조화로 만드는 풍성한 울림.</p>
+                      <button
+                        class="card-audio-toggle swiper-no-swiping"
+                        type="button"
+                        aria-label="관악합주 음악 재생"
+                        aria-pressed="false"
+                      >
+                        <span aria-hidden="true">▶</span>
+                        <span class="card-audio-label">재생</span>
+                      </button>
                     </div>
                   </article>
 
@@ -299,15 +339,25 @@
                     data-aos="zoom-in"
                     data-aos-duration="500"
                     data-aos-delay="480"
+                    data-audio="audio/Clarinet Concerto in A Major, K. 622_ I. Allegro [Wj7FY3oKkmY].mp3"
                   >
                     <figure class="photo-figure card-photo rs-card-photo">
-                      <img src="images/piano.jpg" alt="독주 연주" />
+                      <img src="images/concerto.jpg" alt="독주 연주" />
                       <figcaption class="sr-only">독주 연주</figcaption>
                     </figure>
                     <div class="card-info rs-card-info">
                       <span class="card-index">05 / SOLO</span>
                       <h3>독주</h3>
                       <p>홀로 완성하는 나만의 선율.</p>
+                      <button
+                        class="card-audio-toggle swiper-no-swiping"
+                        type="button"
+                        aria-label="독주 음악 재생"
+                        aria-pressed="false"
+                      >
+                        <span aria-hidden="true">▶</span>
+                        <span class="card-audio-label">재생</span>
+                      </button>
                     </div>
                   </article>
                 </div>
@@ -652,6 +702,7 @@
         centeredSlides: true,
         slidesPerView: "auto",
         freeMode: true,
+        noSwiping: true,
         spaceBetween: 24,
         breakpoints: {
           851: {
@@ -669,6 +720,77 @@
           prevEl: ".ensemble-prev",
           nextEl: ".ensemble-next",
         },
+      });
+
+      const ensemblePlayer = new Audio();
+      const ensembleCards = document.querySelectorAll(".ensemble-card");
+      let activeAudioCard = null;
+
+      function setAudioButtonState(card, isPlaying) {
+        const button = card.querySelector(".card-audio-toggle");
+        const label = button.querySelector(".card-audio-label");
+        const action = isPlaying ? "정지" : "재생";
+
+        label.textContent = action;
+        button.setAttribute("aria-pressed", String(isPlaying));
+        button.setAttribute(
+          "aria-label",
+          `${card.querySelector("h3").textContent} 음악 ${action}`,
+        );
+      }
+
+      function playEnsembleCard(card) {
+        if (activeAudioCard !== card) {
+          ensemblePlayer.pause();
+          if (activeAudioCard) {
+            setAudioButtonState(activeAudioCard, false);
+          }
+          activeAudioCard = card;
+          ensemblePlayer.src = card.dataset.audio;
+        }
+
+        ensemblePlayer
+          .play()
+          .then(() => {
+            if (activeAudioCard === card) {
+              setAudioButtonState(card, true);
+            }
+          })
+          .catch((error) => {
+            console.error("Could not play ensemble audio.", error);
+            if (activeAudioCard === card) {
+              setAudioButtonState(card, false);
+              const button = card.querySelector(".card-audio-toggle");
+              button.querySelector(".card-audio-label").textContent =
+                "재생 오류";
+              button.setAttribute(
+                "aria-label",
+                `${card.querySelector("h3").textContent} 음악 재생 실패. 다시 시도`,
+              );
+            }
+          });
+      }
+
+      ensembleCards.forEach((card) => {
+        card.addEventListener("click", (event) => {
+          if (event.target.closest(".card-audio-toggle")) {
+            if (activeAudioCard === card && !ensemblePlayer.paused) {
+              ensemblePlayer.pause();
+              setAudioButtonState(card, false);
+            } else {
+              playEnsembleCard(card);
+            }
+            return;
+          }
+
+          playEnsembleCard(card);
+        });
+      });
+
+      ensemblePlayer.addEventListener("ended", () => {
+        if (activeAudioCard) {
+          setAudioButtonState(activeAudioCard, false);
+        }
       });
 
       AOS.init({
