@@ -160,7 +160,7 @@
                 <h2 class="section-title">함께할 때 더 아름다운 음악</h2>
               </div>
               <p class="section-copy">
-                함께 연주할 때 더 완벽해지는 음악, 아마빌레와 함께하세요.
+                함께 연주할 때 더 완벽해지는 음악,<br />아마빌레와 함께하세요.
               </p>
             </div>
 
@@ -170,18 +170,42 @@
               data-aos-duration="500"
               data-aos-delay="80"
             >
-              <span class="ticker-badge">NOW REHEARSING</span>
-              <div class="ticker-track">
-                <span>모차르트 클라리넷 5중주 A장조 K.581</span>
-                <span class="ticker-dot">·</span>
-                <span>바흐 2대의 피아노를 위한 협주곡</span>
-                <span class="ticker-dot">·</span>
-                <span>포레 실내악 소품집 현악 4중주</span>
-                <span class="ticker-dot">·</span>
+              <span class="ticker-badge">recommend</span>
+              <div class="ticker-window">
+                <div class="ticker-track">
+                  <div class="ticker-group">
+                    <span>슈베르트 - 네 손을 위한 환상곡 f단조</span>
+                    <span class="ticker-dot">·</span>
+                    <span>모차르트 - 세레나데 제10번 '그랑 파르티타'</span>
+                    <span class="ticker-dot">·</span>
+                    <span>차이콥스키 - 현을 위한 세레나데 C장조</span>
+                    <span class="ticker-dot">·</span>
+                    <span>홀스트 - 군악대를 위한 제1모음곡</span>
+                    <span class="ticker-dot">·</span>
+                    <span>모차르트 - 클라리넷 협주곡 A장조 K.622</span>
+                    <span class="ticker-dot">·</span>
+                  </div>
+                  <div class="ticker-group" aria-hidden="true">
+                    <span>슈베르트 - 네 손을 위한 환상곡 f단조</span>
+                    <span class="ticker-dot">·</span>
+                    <span>모차르트 - 세레나데 제10번 '그랑 파르티타'</span>
+                    <span class="ticker-dot">·</span>
+                    <span>차이콥스키 - 현을 위한 세레나데 C장조</span>
+                    <span class="ticker-dot">·</span>
+                    <span>홀스트 - 군악대를 위한 제1모음곡</span>
+                    <span class="ticker-dot">·</span>
+                    <span>모차르트 - 클라리넷 협주곡 A장조 K.622</span>
+                    <span class="ticker-dot">·</span>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div class="ensemble-carousel">
+            <div
+              class="ensemble-carousel"
+              data-aos="zoom-in"
+              data-aos-duration="500"
+            >
               <div
                 class="swiper ensemble-grid rs-card-grid ensemble-swiper"
                 aria-label="앙상블 카드"
@@ -446,12 +470,13 @@
               data-aos-duration="1200"
             >
               <h3 class="form-title">방문 및 상담 신청</h3>
-              <form class="amabile-form" onsubmit="return false;">
+              <form class="amabile-form">
                 <div class="form-group">
                   <label for="visitor-name">이름</label>
                   <input
                     type="text"
                     id="visitor-name"
+                    name="name"
                     placeholder="이름을 입력해주세요"
                     required
                   />
@@ -472,7 +497,7 @@
 
                 <div class="form-group">
                   <label for="visitor-age">연령</label>
-                  <select id="visitor-age" required>
+                  <select id="visitor-age" name="age" required>
                     <option value="" disabled selected>
                       연령대를 선택하세요
                     </option>
@@ -488,6 +513,7 @@
                   <input
                     type="tel"
                     id="visitor-contact"
+                    name="contact"
                     placeholder="연락처를 입력해주세요 (- 제외)"
                     required
                   />
@@ -522,7 +548,7 @@
                     <label class="radio-label">
                       <input
                         type="radio"
-                        name="performance-type"
+                        name="performance_type"
                         value="독주"
                         checked
                       />
@@ -531,7 +557,7 @@
                     <label class="radio-label">
                       <input
                         type="radio"
-                        name="performance-type"
+                        name="performance_type"
                         value="앙상블"
                       />
                       앙상블
@@ -539,7 +565,7 @@
                     <label class="radio-label">
                       <input
                         type="radio"
-                        name="performance-type"
+                        name="performance_type"
                         value="실내악"
                       />
                       실내악
@@ -551,11 +577,13 @@
                   <label for="visitor-ps">추신</label>
                   <textarea
                     id="visitor-ps"
+                    name="message"
                     rows="2"
                     placeholder="기타 전달하실 말씀을 적어주세요"
                   ></textarea>
                 </div>
 
+                <p class="form-status" role="status" aria-live="polite"></p>
                 <div class="form-submit-wrap">
                   <button type="submit" class="button submit-btn">
                     문의 보내기 <span class="arrow">↗</span>
@@ -571,12 +599,12 @@
       <div class="pin-track" id="way-track">
         <section class="pinned-section way-guide">
           <div class="wrap way-grid">
-            <figure class="way-photo photo-figure">
+            <figure class="way-photo photo-figure" data-aos="zoom-in">
               <img src="images/way.jpg" alt="오시는 길 안내 이미지" />
               <figcaption class="sr-only">오시는 길 안내 이미지</figcaption>
             </figure>
 
-            <div class="way-content">
+            <div class="way-content location-text-box" data-aos="zoom-in">
               <span class="eyebrow">Way to Amabile</span>
               <h2 class="section-title">오시는 길 안내</h2>
               <p class="section-copy">
@@ -601,9 +629,12 @@
 
     <footer>
       <div class="wrap footer-inner">
-        <div>
-          <div class="footer-brand">아마빌레 아카데미</div>
-          <div class="footer-sub">AMABILE ACADEMY · MUSIC COMMUNITY</div>
+        <div class="footer-brand-lockup">
+          <span class="brand-mark" aria-hidden="true">A</span>
+          <div>
+            <div class="footer-brand">아마빌레 아카데미</div>
+            <div class="footer-sub">AMABILE ACADEMY · MUSIC COMMUNITY</div>
+          </div>
         </div>
         <div class="footer-right">
           주소 : 대구광역시 동구 화랑로 525<br />
@@ -614,6 +645,7 @@
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
       new Swiper(".ensemble-swiper", {
         grabCursor: true,
@@ -647,6 +679,47 @@
         mirror: true,
         disable: () =>
           window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+      });
+
+      const emailForm = document.querySelector(".amabile-form");
+      const emailStatus = emailForm.querySelector(".form-status");
+      const emailSubmitButton = emailForm.querySelector(
+        'button[type="submit"]',
+      );
+
+      emailForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        emailStatus.textContent = "문의 내용을 전송하고 있습니다.";
+        emailStatus.dataset.state = "sending";
+        emailSubmitButton.disabled = true;
+
+        try {
+          if (typeof emailjs === "undefined") {
+            throw new Error("EmailJS SDK failed to load.");
+          }
+
+          emailjs.init({ publicKey: "XGV2L7vh4zj_EUSEH" });
+          await emailjs.sendForm(
+            "service_iutdv06",
+            "template_h20dfsp",
+            emailForm,
+          );
+          emailStatus.textContent = "문의가 전송되었습니다. 감사합니다.";
+          emailStatus.dataset.state = "success";
+          emailForm.reset();
+        } catch (error) {
+          console.error("EmailJS request failed.", error);
+          const errorMessage =
+            error instanceof Error
+              ? error.message
+              : error && typeof error === "object" && "text" in error
+                ? String(error.text)
+                : String(error);
+          emailStatus.textContent = `문의 전송 실패: ${errorMessage}`;
+          emailStatus.dataset.state = "error";
+        } finally {
+          emailSubmitButton.disabled = false;
+        }
       });
     </script>
   </body>

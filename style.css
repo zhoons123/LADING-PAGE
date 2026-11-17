@@ -439,7 +439,7 @@ HERO
 2. ABOUT
 ════════════════════════════════════════════════ */
 .intro {
-  background: var(--ivory);
+  background: var(--charcoal-brown);
   width: 100%;
   align-items: center;
   position: relative;
@@ -449,19 +449,25 @@ HERO
 .intro::before {
   content: "";
   position: absolute;
-  inset: -18px;
+  inset: -8%;
   z-index: -2;
-  background: url("images/piano2.jpg") center / 100% auto no-repeat;
-  animation: kenBurnsDirect 16s infinite alternate ease-in-out;
-  filter: blur(7px);
-  transform: scale(1.04);
+  background: url("images/violin.jpg") center / cover no-repeat;
+  animation: introBackgroundZoom 16s infinite alternate ease-in-out;
 }
 .intro::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: rgba(245, 240, 230, 0.62);
+  background: rgba(41, 37, 31, 0.68);
+}
+@keyframes introBackgroundZoom {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1.18);
+  }
 }
 .intro-grid {
   position: relative;
@@ -657,13 +663,30 @@ HERO
   letter-spacing: 0.1em;
   border-radius: 12px;
 }
+.ticker-window {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
 .ticker-track {
   display: flex;
+  width: max-content;
+  animation: ticker-scroll 36s linear infinite;
+}
+.ticker-group {
+  display: flex;
+  flex-shrink: 0;
   align-items: center;
   gap: 12px;
+  padding-right: 24px;
   font-size: 12px;
   color: var(--charcoal-brown);
   white-space: nowrap;
+}
+@keyframes ticker-scroll {
+  to {
+    transform: translateX(-50%);
+  }
 }
 .ticker-dot {
   color: var(--amber-orange);
@@ -956,7 +979,7 @@ HERO
 .lesson-bg-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(245, 240, 230, 0.45);
+  background: rgba(41, 37, 31, 0.68);
   backdrop-filter: blur(10px);
 }
 .lesson-grid {
@@ -1253,6 +1276,19 @@ HERO
   justify-content: center;
   margin-top: 6px;
 }
+.form-status {
+  min-height: 1.2em;
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+.form-status[data-state="success"] {
+  color: var(--wood-brown);
+}
+.form-status[data-state="error"] {
+  color: #b23b32;
+}
 .submit-btn {
   width: 100%;
   max-width: 200px;
@@ -1273,9 +1309,23 @@ HERO
 7. WAY GUIDE
 ════════════════════════════════════════════════ */
 .way-guide {
-  background: var(--header-glass);
+  position: relative;
+  isolation: isolate;
+  background: var(--charcoal-brown);
   width: 100%;
   align-items: center;
+}
+.way-guide::before {
+  content: "";
+  position: absolute;
+  inset: -8%;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(41, 37, 31, 0.68), rgba(41, 37, 31, 0.68)),
+    url("images/clarinet.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .way-grid {
   display: grid;
@@ -1317,6 +1367,11 @@ footer {
   justify-content: space-between;
   align-items: flex-end;
   gap: 30px;
+}
+.footer-brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 .footer-brand {
   font: 500 20px var(--serif);
