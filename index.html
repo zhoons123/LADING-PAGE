@@ -8,6 +8,11 @@
       content="아마빌레 아카데미 - 함께 연주하고 배우며 음악을 즐기는 공간"
     />
     <title>아마빌레 아카데미 | AMABILE ACADEMY</title>
+    <script>
+      if (localStorage.getItem("amabile-theme") === "dark") {
+        document.documentElement.dataset.theme = "dark";
+      }
+    </script>
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="stylesheet" href="common.css" />
     <link
@@ -61,6 +66,16 @@
           <a href="#lesson-track">레슨소개</a>
           <a href="#location-track">문의하기</a>
           <a href="#way-track">오시는 길</a>
+          <button
+            class="theme-toggle"
+            id="theme-toggle"
+            type="button"
+            aria-pressed="false"
+            aria-label="다크 모드로 전환"
+          >
+            <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+            <span class="theme-toggle-label">다크 모드</span>
+          </button>
         </nav>
       </div>
     </header>

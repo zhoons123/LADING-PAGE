@@ -177,6 +177,33 @@ HEADER
   color: var(--amber-orange);
 }
 
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 10px;
+  border: 1px solid var(--wood-brown);
+  background: transparent;
+  color: var(--charcoal-brown);
+  font-family: var(--ui-font);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+.theme-toggle:hover {
+  background: var(--wood-brown);
+  color: var(--ivory);
+}
+.theme-toggle-icon {
+  font-size: 15px;
+  line-height: 1;
+}
+
 .header-cta {
   min-height: 40px;
   padding: 0 16px;
@@ -1708,8 +1735,12 @@ RESPONSIVE  850px
     font-size: 13px;
     border-bottom: 1px solid var(--line);
   }
-  .nav a:last-child {
+  .nav a:last-of-type {
     border-bottom: 0;
+  }
+  .theme-toggle {
+    align-self: flex-start;
+    margin: 12px 4px 0;
   }
   .menu-toggle:checked ~ .nav {
     display: flex;
@@ -1985,4 +2016,95 @@ button,
   height: auto;
   max-height: calc(100vh - 64px);
   object-fit: contain;
+}
+
+html[data-theme="dark"] .brand-title,
+html[data-theme="dark"] .nav a,
+html[data-theme="dark"] .theme-toggle {
+  color: var(--theme-dark-text);
+}
+
+html[data-theme="dark"] .theme-toggle {
+  border-color: var(--amber-orange);
+}
+
+html[data-theme="dark"] .nav a + a::before {
+  border-color: var(--amber-orange);
+}
+
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .ensemble,
+html[data-theme="dark"] .lesson {
+  background-color: var(--theme-dark-surface);
+}
+
+html[data-theme="dark"] .hero-top-left-widget,
+html[data-theme="dark"] .hero-bottom-right-h1 h1,
+html[data-theme="dark"] .section-title,
+html[data-theme="dark"] .ratio-pie-center,
+html[data-theme="dark"] .ratio-legend li,
+html[data-theme="dark"] .ticker-group,
+html[data-theme="dark"] .rs-card-info h3,
+html[data-theme="dark"] .lesson-item strong,
+html[data-theme="dark"] .info-row span,
+html[data-theme="dark"] .form-title,
+html[data-theme="dark"] .radio-label,
+html[data-theme="dark"] .amabile-form input,
+html[data-theme="dark"] .amabile-form select,
+html[data-theme="dark"] .amabile-form textarea,
+html[data-theme="dark"] .music-player-title,
+html[data-theme="dark"] .music-player-toggle {
+  color: var(--theme-dark-text);
+}
+
+html[data-theme="dark"] .section-copy,
+html[data-theme="dark"] .ratio-subtitle,
+html[data-theme="dark"] .ratio-pie-center small,
+html[data-theme="dark"] .rs-card-info p,
+html[data-theme="dark"] .lesson-item span,
+html[data-theme="dark"] .form-status {
+  color: var(--theme-dark-muted);
+}
+
+html[data-theme="dark"] .eyebrow,
+html[data-theme="dark"] .intro-signature,
+html[data-theme="dark"] .ratio-header > span:first-child,
+html[data-theme="dark"] .ratio-legend strong,
+html[data-theme="dark"] .info-row b,
+html[data-theme="dark"] .form-group > label,
+html[data-theme="dark"] .form-status[data-state="success"] {
+  color: var(--amber-orange);
+}
+
+html[data-theme="dark"] .intro-text,
+html[data-theme="dark"] .instrument-ratio-box,
+html[data-theme="dark"] .lesson-content-card,
+html[data-theme="dark"] .location-text-box,
+html[data-theme="dark"] .contact-form-box {
+  background: var(--theme-dark-surface-raised);
+  border-color: var(--theme-dark-border);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, .35);
+}
+
+html[data-theme="dark"] .rehearsal-ticker,
+html[data-theme="dark"] .rs-card,
+html[data-theme="dark"] .ensemble-card,
+html[data-theme="dark"] .ensemble-nav,
+html[data-theme="dark"] .ratio-pie::before,
+html[data-theme="dark"] .way-photo,
+html[data-theme="dark"] .music-player,
+html[data-theme="dark"] .music-player-toggle,
+html[data-theme="dark"] .amabile-form input,
+html[data-theme="dark"] .amabile-form select,
+html[data-theme="dark"] .amabile-form textarea {
+  background-color: var(--theme-dark-surface);
+  border-color: var(--theme-dark-border);
+}
+
+html[data-theme="dark"] .amabile-form select {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23D98B45' d='M1.41 0L6 4.58 10.59 0 12 1.41l-6 6-6-6z'/%3E%3C/svg%3E");
+}
+
+html[data-theme="dark"] .button.light {
+  color: var(--theme-dark-text);
 }

@@ -23,12 +23,28 @@
 --brown-shadow-10: rgba(41, 37, 31, .1);
 --brown-overlay-85: rgba(41, 37, 31, .85);
 
+--theme-dark-surface: #29251F;
+--theme-dark-surface-raised: rgba(41, 37, 31, .92);
+--theme-dark-text: #F5F0E6;
+--theme-dark-muted: rgba(245, 240, 230, .72);
+--theme-dark-border: rgba(217, 139, 69, .3);
+
 --serif: "Noto Serif KR", serif;
 --sans: "DM Sans", "Noto Sans KR", sans-serif;
 
 /* Windows built-in fonts */
 --brand-font: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
 --ui-font: "Malgun Gothic", "맑은 고딕", "Segoe UI", sans-serif;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --line: var(--theme-dark-border);
+  --header-glass: rgba(41, 37, 31, .94);
+  --header-menu: rgba(41, 37, 31, .98);
+  --menu-button-bg: rgba(41, 37, 31, .8);
+  --muted: var(--theme-dark-muted);
+  --wood-brown: var(--amber-orange);
 }
 
 /* SweetAlert2 popup */
