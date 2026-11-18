@@ -17,6 +17,22 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
   </head>
   <body>
+    <!-- [이미지 레이어 팝업 구조] -->
+    <div id="popup-wrapper" class="popup-overlay">
+      <div class="popup-box">
+        <!-- 이미지 바로 위 오른쪽 컨트롤 -->
+        <div class="popup-header-bar">
+          <label class="today-close">
+            <input type="checkbox" id="check-today" /> 오늘 하루 보지 않기
+          </label>
+          <button type="button" id="close-btn" class="btn-close">✕ 닫기</button>
+        </div>
+
+        <div class="popup-image-area">
+          <img src="images/popup.jpg" alt="이벤트 팝업 이미지" />
+        </div>
+      </div>
+    </div>
     <!-- NAVIGATION HEADER -->
     <header class="header">
       <div class="wrap header-inner">
@@ -675,7 +691,13 @@
       </div>
     </main>
 
-    <audio id="background-music" src="audio/bgm.mp3" autoplay loop preload="auto"></audio>
+    <audio
+      id="background-music"
+      src="audio/bgm.mp3"
+      autoplay
+      loop
+      preload="auto"
+    ></audio>
     <aside class="music-player" aria-label="배경음악 플레이어">
       <span class="music-player-title">BGM</span>
       <button
@@ -688,7 +710,12 @@
         <span class="music-player-icon" aria-hidden="true">▶</span>
         <span class="music-player-label">Play</span>
       </button>
-      <span class="sr-only" id="background-music-status" role="status" aria-live="polite"></span>
+      <span
+        class="sr-only"
+        id="background-music-status"
+        role="status"
+        aria-live="polite"
+      ></span>
     </aside>
     <a class="back-to-top" href="#home-track" aria-label="맨 위로 이동">♪</a>
 
@@ -711,6 +738,8 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="script.js"></script>
+    <!-- SweetAlert2 라이브러리 -->
   </body>
 </html>

@@ -26,14 +26,17 @@ new Swiper(".ensemble-swiper", {
 const ensemblePlayer = new Audio();
 const ensembleCards = document.querySelectorAll(".ensemble-card");
 const backgroundMusic = document.querySelector("#background-music");
-const backgroundMusicToggle = document.querySelector("#background-music-toggle");
-const backgroundMusicIcon = backgroundMusicToggle.querySelector(
-  ".music-player-icon",
+const backgroundMusicToggle = document.querySelector(
+  "#background-music-toggle",
 );
+const backgroundMusicIcon =
+  backgroundMusicToggle.querySelector(".music-player-icon");
 const backgroundMusicLabel = backgroundMusicToggle.querySelector(
   ".music-player-label",
 );
-const backgroundMusicStatus = document.querySelector("#background-music-status");
+const backgroundMusicStatus = document.querySelector(
+  "#background-music-status",
+);
 let activeAudioCard = null;
 
 function setBackgroundMusicState(isPlaying) {
@@ -74,8 +77,7 @@ backgroundMusic.addEventListener("pause", () => {
   setBackgroundMusicState(false);
 });
 backgroundMusic.addEventListener("error", () => {
-  backgroundMusicStatus.textContent =
-    "배경음악 파일을 불러오지 못했습니다.";
+  backgroundMusicStatus.textContent = "배경음악 파일을 불러오지 못했습니다.";
 });
 backgroundMusicToggle.addEventListener("click", () => {
   if (!backgroundMusic.paused) {
@@ -169,8 +171,7 @@ AOS.init({
   offset: Math.round(window.innerHeight / 2),
   once: false,
   mirror: true,
-  disable: () =>
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  disable: () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
 });
 
 const emailForm = document.querySelector(".amabile-form");
@@ -193,6 +194,7 @@ emailForm.addEventListener("submit", async (event) => {
     emailStatus.textContent = "문의가 전송되었습니다. 감사합니다.";
     emailStatus.dataset.state = "success";
     emailForm.reset();
+    showPopup("전송 완료!", "문의가 전송되었습니다. 감사합니다.", "success");
   } catch (error) {
     console.error("EmailJS request failed.", error);
     const errorMessage =
@@ -201,9 +203,46 @@ emailForm.addEventListener("submit", async (event) => {
         : error && typeof error === "object" && "text" in error
           ? String(error.text)
           : String(error);
-    emailStatus.textContent = `문의 전송 실패: ${errorMessage}`;
+    emailStatus.textContent = `전송에 실패했습니다. 다시 확인해 주세요: ${errorMessage}`;
     emailStatus.dataset.state = "error";
+    showPopup("전송 실패...", emailStatus.textContent, "error");
   } finally {
     emailSubmitButton.disabled = false;
   }
+});
+function showPopup(title, text, icon = "info") {
+  return Swal.fire({
+    title,
+    text,
+    icon,
+    confirmButtonText: "확인",
+    customClass: {
+      popup: "amabile-popup",
+      confirmButton: "amabile-confirm",
+    },
+  });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const popupWrapper = document.getElementById("popup-wrapper");
+  const closeBtn = document.getElementById("close-btn");
+  const checkToday = document.getElementById("check-today");
+
+  // 1. 로컬스토리지에서 만료 시간 확인하여 숨김 처리
+  const expiredDate = localStorage.getItem("popupExpired");
+  const today = new Date().getTime();
+
+  if (expiredDate && today < expiredDate) {
+    popupWrapper.style.display = "none";
+  }
+
+  // 2. 닫기 버튼 클릭 시 동작
+  closeBtn.addEventListener("click", function () {
+    if (checkToday.checked) {
+      // 24시간 뒤의 시간 계산
+      const tomorrow = new Date().getTime() + 24 * 60 * 60 * 1000;
+      localStorage.setItem("popupExpired", tomorrow);
+    }
+    popupWrapper.style.display = "none";
+  });
 });

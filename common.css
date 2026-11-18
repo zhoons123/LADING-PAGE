@@ -31,6 +31,55 @@
 --ui-font: "Malgun Gothic", "맑은 고딕", "Segoe UI", sans-serif;
 }
 
+/* SweetAlert2 popup */
+.swal2-popup.amabile-popup {
+  background: var(--ivory);
+  border: 2px solid var(--amber-orange);
+  color: var(--charcoal-brown);
+}
+
+.swal2-popup.amabile-popup .swal2-title,
+.swal2-popup.amabile-popup .swal2-html-container {
+  color: var(--charcoal-brown);
+}
+
+.swal2-popup.amabile-confirm {
+  background: var(--wood-brown) !important;
+  color: var(--ivory) !important;
+  border: 0;
+}
+
+.swal2-confirm.amabile-confirm.swal2-styled {
+  background-color: var(--wood-brown) !important;
+  color: var(--ivory) !important;
+  border: 0 !important;
+  box-shadow: none;
+}
+
+.swal2-popup.amabile-popup .swal2-icon.swal2-success {
+  border-color: #2e7d32 !important;
+  color: #2e7d32 !important;
+}
+
+.swal2-popup.amabile-popup .swal2-icon.swal2-success .swal2-success-line-tip,
+.swal2-popup.amabile-popup .swal2-icon.swal2-success .swal2-success-line-long {
+  background-color: #2e7d32 !important;
+}
+
+.swal2-popup.amabile-popup .swal2-icon.swal2-success .swal2-success-ring {
+  border-color: #2e7d32 !important;
+}
+
+.swal2-popup.amabile-popup .swal2-icon.swal2-error {
+  border-color: #c62828 !important;
+  color: #c62828 !important;
+}
+
+.swal2-popup.amabile-popup .swal2-icon.swal2-error .swal2-x-mark-line-left,
+.swal2-popup.amabile-popup .swal2-icon.swal2-error .swal2-x-mark-line-right {
+  background-color: #c62828 !important;
+}
+
 { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
