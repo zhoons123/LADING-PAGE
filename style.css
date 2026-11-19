@@ -1572,6 +1572,17 @@ footer {
 RESPONSIVE  1024px
 ════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
+  html {
+    scroll-snap-type: none;
+  }
+  .pin-track {
+    height: auto;
+  }
+  .pinned-section {
+    position: relative;
+    top: auto;
+  }
+
   .wrap {
     width: min(100% - 48px, 900px);
   }
